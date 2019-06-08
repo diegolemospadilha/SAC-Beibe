@@ -98,21 +98,23 @@ public class UsuarioDAO {
         try {
             conn = ConnectionFactory.getConnection();
             PreparedStatement statement = ConnectionFactory.getPreparedStatement(conn,
-                    "SELECT * FROM tb_usuario WHERE idUser = ? ");
+                    "SELECT * FROM tb_usuario WHERE id_usuario = ? ");
             statement.setInt(1, idUser);
             statement.execute();
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-                user.setIdUsuario(rs.getInt("idUser"));
+                user.setIdUsuario(rs.getInt("id_usuario"));
                 user.setNomeUsuario(rs.getString("nome"));
                 user.setCpf(rs.getString("cpf"));
                 user.setEmail(rs.getString("email"));
                 user.setTelefone(rs.getString("telefone"));
-                user.setNomeRua(rs.getString("rua_user"));
-                user.setNumeroRua(rs.getInt("nr_user"));
-                user.setCep(rs.getString("cep_user"));
-                int idCidade = rs.getInt("id_cidade_user");
-                
+                user.setNomeRua(rs.getString("nome_rua"));
+                user.setNumeroRua(rs.getInt("numero_rua"));
+                user.setComplemento(rs.getString("complemento"));
+                user.setBairro(rs.getString("bairro"));
+                user.setCep(rs.getString("cep"));
+                user.setTipoUsuario(rs.getString("tipo_usuario"));
+                int idCidade = rs.getInt("id_cidade");
                 Cidade cidade = CidadeFacade.buscarCidadeCliente(idCidade);
                 if(cidade != null){
                    user.setCidade(cidade);
@@ -222,7 +224,7 @@ public class UsuarioDAO {
             statement.setString(8,user.getComplemento());
             statement.setString(9,user.getBairro());
             statement.setString(10,user.getCep());
-            statement.setString(11,"C");
+            statement.setString(11,tipoUsuario);
             statement.setInt(12, user.getCidade().getIdCidade());
             statement.setInt(13, user.getIdUsuario());
             statement.executeUpdate();
@@ -248,7 +250,7 @@ public class UsuarioDAO {
 
     public List<Usuario> allFuncionarios() {
         try {
-
+            listaUsuarios = new ArrayList<Usuario>();
             conn = ConnectionFactory.getConnection();
             ResultSet rs = ConnectionFactory.getResultSet(conn, "SELECT * FROM tb_usuario WHERE tipo_usuario='F' OR tipo_usuario='G'");
             while (rs.next()) {

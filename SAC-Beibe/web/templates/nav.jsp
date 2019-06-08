@@ -46,8 +46,8 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="courses.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Funcionários</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
-                        <a class="dropdown-item" href="courses.html">Cadastrar Funcionário/Gerente</a>
-                        <a class="dropdown-item" href="FuncionarioServlet?action=list">Listar Funcionários</a>
+                        <a class="dropdown-item" href="../FuncionarioServlet?action=formNew">Cadastrar Funcionário/Gerente</a>
+                        <a class="dropdown-item" href="../FuncionarioServlet?action=list">Listar Funcionários</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -69,7 +69,7 @@
     </div>
     <div class="d-flex flex-row-reverse mt-4 text-white">
         <c:if test="${!empty loginBean}">
-            <a href='../LogoutServlet' class='btn btn-primary btn-sm  mt-3 mr-3 h-50'>SAIR</a>
+            <a href='../LogoutServlet' class='btn btn-primary btn-sm  mt-3 mr-3'>SAIR</a>
             <span class="m  r-3 m-3"> <c:out value="${loginBean.nomeUsuario}"/> </span>
             <i class="far fa-user-circle fa-2x mt-3"></i>
         </c:if>

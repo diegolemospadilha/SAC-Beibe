@@ -13,9 +13,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 
-<!-- Theme Style -->
-<link rel="stylesheet" href="http://localhost:8081/SAC-Beibe/css/style.css">
-
 <script src="http://localhost:8081/SAC-Beibe/js/jquery-3.2.1.min.js"></script>
 <script src="http://localhost:8081/SAC-Beibe/js/jquery-migrate-3.0.0.js"></script>
 <script src="http://localhost:8081/SAC-Beibe/js/popper.min.js"></script>

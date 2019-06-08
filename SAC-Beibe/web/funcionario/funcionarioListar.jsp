@@ -5,6 +5,8 @@
 <!-- END header -->
 <html>
     <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
         <jsp:include page="../templates/head.jsp"/>
     </head>
     <body>
@@ -34,27 +36,28 @@
                         </div>    
                     </c:when>
                     <c:otherwise>
-                        <div class='d-flex justify-content-center m-5'>
-                            <table class='table w-50 text-center'>    
+                       
+                            <table class='table w-75 text-center'>    
                                 <tr>
                                     <th>Id Funcionário</th>
                                     <th>Nome do funcionário</th>
                                     <th>CPF</th>
                                     <th>Email</th>
                                     <th>Cargo</th>
-                                    <th>Ver/Editar/Excluir</th>
+                                    <th style="width: 20%">Ver/Editar/Excluir</th>
                                 </tr>
 
                                 <c:forEach items="${listaFuncionarios}" var="funcionario">
                                     <tr>
                                         <td><c:out value="${funcionario.idUsuario}"/></td>
-                                        <td><c:out value="${funcionario.nome}"/></td>
+                                        <td><c:out value="${funcionario.nomeUsuario}"/></td>
                                         <td><c:out value="${funcionario.cpf}"/></td>
                                         <td><c:out value="${funcionario.email}"/></td>
+                                        <td><c:out value="${funcionario.tipoUsuario}"/></td>
 
-                                        <td> 
-                                            <a class="button" href="../ClienteServlet?action=show&id=${funcionario.idUsuario}" class="mr-3"><button><i class="far fa-eye fa-2x"></i></button></a>
-                                            <a class="button" href="../ClienteServlet?action=formUpdate&id=${funcionario.idUsuario}" class="mr-3"><button><i class="far fa-edit fa-2x"></button></i></a>
+                                        <td style="width: 20%"> 
+                                            <a class="button" href="FuncionarioServlet?action=show&id=${funcionario.idUsuario}" class="mr-1"><button><i class="far fa-eye fa-2x"></i></button></a>
+                                            <a class="button" href="FuncionarioServlet?action=formUpdate&id=${funcionario.idUsuario}" class="mr-1"><button><i class="far fa-edit fa-2x"></button></i></a>
                                             <a href="#" data-toggle="modal" data-target="#myModal" ><button id="idUsuario" value="${funcionario.idUsuario}"  ><i class="far fa-trash-alt fa-2x"></i></button></a> 
                                         </td>
                                     </tr>
@@ -65,11 +68,29 @@
                 </c:choose>
 
                 <div class="d-flex justify-content-center">
-                    <a href='/ClienteServlet?action=formNew' class='btn btn-primary col-md-1 ml-2' style='float: right; '>Cadastrar Funcionário</a>
+                    <a href='../FuncionarioServlet?action=formNew' class='btn btn-primary col-md-1 ml-2'>Cadastrar Funcionário</a>
                 </div>
 
                 <jsp:include page="../templates/modalRemove.jsp"/>
                 <jsp:include page="../templates/footer.jsp" />
     </body>
 </html>
+<script>
+$("#save").click(function () {
+    var idUsuario = $("#idUsuario").val();
+    var id = "action=remove" + "&id=" + idUsuario;
+    console.log(id);
+    $('#myModal').modal('hide');
+    $.ajax({
+        type: "GET",
+        url: "FuncionarioServlet",
+        data: id,
+        success: function (result) {
+            location.reload();
 
+        },
+        error: function (error) {
+            console.log("error" + error);
+        }
+    });
+});</script>

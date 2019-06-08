@@ -69,16 +69,16 @@ public class FuncionarioServlet extends HttpServlet {
                         request.setAttribute("listaFuncionarios", listaUsuarios);
                         rd = getServletContext().getRequestDispatcher("/funcionario/funcionarioListar.jsp");
                         rd.forward(request, response);
-
-                        break;
+                    break;
 
                     case "show":
                         strId = request.getParameter("id");
                         id = Integer.parseInt(strId);
-                        user = UsuarioFacade.buscarPorId(id, "cliente");
+                        user = UsuarioFacade.buscarPorId(id);
                         if (user != null) {
-                            request.setAttribute("user", user);
-                            rd = getServletContext().getRequestDispatcher("/cliente/clienteVisualizar.jsp");
+                            request.setAttribute("funcionario", user);
+                            System.out.println(user.toString());
+                            rd = getServletContext().getRequestDispatcher("/funcionario/funcionarioVisualizar.jsp");
                             rd.forward(request, response);
                         }
                         break;
@@ -86,17 +86,17 @@ public class FuncionarioServlet extends HttpServlet {
                     case "formUpdate":
                         strId = request.getParameter("id");
                         id = Integer.parseInt(strId);
-                        user = UsuarioFacade.buscarPorId(id, "C");
+                        user = UsuarioFacade.buscarPorId(id);
                         if (user != null) {
-                            request.setAttribute("cliente", user);
+                            request.setAttribute("funcionario", user);
                             estados = EstadoFacade.buscarTodos();
                             request.setAttribute("estados", estados);
                             System.out.println(getServletContext().toString());
-                            rd = getServletContext().getRequestDispatcher("/cliente/clienteForm.jsp");
+                            rd = getServletContext().getRequestDispatcher("/funcionario/funcionarioForm.jsp");
                             rd.forward(request, response);
                         } else {
-                            request.setAttribute("cliente", user);
-                            rd = getServletContext().getRequestDispatcher("/cliente/clienteForm.jsp");
+                            request.setAttribute("funcionario", user);
+                            rd = getServletContext().getRequestDispatcher("/funcionario/funcionarioForm.jsp");
                             rd.forward(request, response);
                         }
 
@@ -128,6 +128,7 @@ public class FuncionarioServlet extends HttpServlet {
                         user.setComplemento(request.getParameter("complemento"));
                         user.setBairro(request.getParameter("bairro"));
                         user.setCep(request.getParameter("cep"));
+                        user.setTipoUsuario(request.getParameter("cargo"));
                         cidade = new Cidade();
 
                         idCidade = Integer.parseInt(request.getParameter("cidade"));
@@ -136,10 +137,9 @@ public class FuncionarioServlet extends HttpServlet {
 
                         if (!user.getNomeUsuario().equals(null) && !user.getCpf().equals(null) && !user.getEmail().equals(null)) {
 
-                            if (UsuarioFacade.alterar(user, "C") == 0) {
-                                System.out.println(user.getNomeUsuario());
-                                System.out.println(user.getEmail());
-                                request.setAttribute("msg", user.getNomeUsuario() + ", sua conta foi atualizada com sucesso");
+                            if (UsuarioFacade.alterar(user, user.getTipoUsuario()) == 0) {
+                               String str  = "Conta atualizada com sucesso para o funiConário " + user.getNomeUsuario();
+                                request.setAttribute("msg", str);
                                 rd = getServletContext().getRequestDispatcher("/main/portal.jsp");
                                 rd.forward(request, response);
 
@@ -155,7 +155,7 @@ public class FuncionarioServlet extends HttpServlet {
                     case "formNew":
                         estados = EstadoFacade.buscarTodos();
                         request.setAttribute("estados", estados);
-                        rd = getServletContext().getRequestDispatcher("/cliente/clienteForm.jsp");
+                        rd = getServletContext().getRequestDispatcher("/funcionario/funcionarioForm.jsp");
                         rd.forward(request, response);
                         break;
 
@@ -174,6 +174,7 @@ public class FuncionarioServlet extends HttpServlet {
                         user.setComplemento(request.getParameter("complemento"));
                         user.setBairro(request.getParameter("bairro"));
                         user.setCep(request.getParameter("cep"));
+                        user.setTipoUsuario(request.getParameter("cargo"));
                         cidade = new Cidade();
 
                         idCidade = Integer.parseInt(request.getParameter("cidade"));
@@ -181,8 +182,8 @@ public class FuncionarioServlet extends HttpServlet {
                         user.setCidade(cidade);
 
                         if (!user.getNomeUsuario().equals(null) && !user.getCpf().equals(null) && !user.getEmail().equals(null)) {
-                            UsuarioFacade.inserir(user, "C");
-                            String str = user.getNomeUsuario() + ", sua conta foi criada com sucesso";
+                            UsuarioFacade.inserir(user, user.getTipoUsuario());
+                            String str = "Conta criada com sucesso para o funcionário(a) " + user.getNomeUsuario();
                             request.setAttribute("msg", str);
                             rd = getServletContext().getRequestDispatcher("/main/portal.jsp");
                             rd.forward(request, response);

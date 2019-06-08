@@ -28,6 +28,10 @@ public class UsuarioFacade {
        System.out.println(senhahex);
        return senhahex;
     }
+    public static Usuario buscarPorId(int id) throws SQLException{
+        Usuario usuario = usuarioDAO.findById(id);
+        return usuario;
+    }
 
     public static Usuario buscarPorId(int id, String cliente) throws SQLException {
        Usuario usuario = usuarioDAO.findById(id, cliente);
