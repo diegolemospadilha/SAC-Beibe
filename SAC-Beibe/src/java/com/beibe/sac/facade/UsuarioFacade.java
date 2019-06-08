@@ -6,6 +6,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -27,6 +28,10 @@ public class UsuarioFacade {
        System.out.println(senhahex);
        return senhahex;
     }
+    public static Usuario buscarPorId(int id) throws SQLException{
+        Usuario usuario = usuarioDAO.findById(id);
+        return usuario;
+    }
 
     public static Usuario buscarPorId(int id, String cliente) throws SQLException {
        Usuario usuario = usuarioDAO.findById(id, cliente);
@@ -43,5 +48,14 @@ public class UsuarioFacade {
         } else{
             return 1;
         }
+    }
+
+    public static List<Usuario> buscarTodos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public static List<Usuario> buscarTodosFuncionarios() {
+        List<Usuario> funcionarios = usuarioDAO.allFuncionarios();
+        return funcionarios;
     }
 }

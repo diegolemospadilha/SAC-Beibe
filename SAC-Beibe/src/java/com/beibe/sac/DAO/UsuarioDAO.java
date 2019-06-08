@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -96,21 +98,23 @@ public class UsuarioDAO {
         try {
             conn = ConnectionFactory.getConnection();
             PreparedStatement statement = ConnectionFactory.getPreparedStatement(conn,
-                    "SELECT * FROM tb_usuario WHERE idUser = ? ");
+                    "SELECT * FROM tb_usuario WHERE id_usuario = ? ");
             statement.setInt(1, idUser);
             statement.execute();
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-                user.setIdUsuario(rs.getInt("idUser"));
+                user.setIdUsuario(rs.getInt("id_usuario"));
                 user.setNomeUsuario(rs.getString("nome"));
                 user.setCpf(rs.getString("cpf"));
                 user.setEmail(rs.getString("email"));
                 user.setTelefone(rs.getString("telefone"));
-                user.setNomeRua(rs.getString("rua_user"));
-                user.setNumeroRua(rs.getInt("nr_user"));
-                user.setCep(rs.getString("cep_user"));
-                int idCidade = rs.getInt("id_cidade_user");
-                
+                user.setNomeRua(rs.getString("nome_rua"));
+                user.setNumeroRua(rs.getInt("numero_rua"));
+                user.setComplemento(rs.getString("complemento"));
+                user.setBairro(rs.getString("bairro"));
+                user.setCep(rs.getString("cep"));
+                user.setTipoUsuario(rs.getString("tipo_usuario"));
+                int idCidade = rs.getInt("id_cidade");
                 Cidade cidade = CidadeFacade.buscarCidadeCliente(idCidade);
                 if(cidade != null){
                    user.setCidade(cidade);
@@ -209,7 +213,7 @@ public class UsuarioDAO {
        try {
             conn = ConnectionFactory.getConnection();
             PreparedStatement statement = ConnectionFactory.getPreparedStatement(conn,
-                    "UPDATE tb_usuario SET nome=? , cpf =? , email=? , senha=?, telefone =?, nome_rua=?, numero_rua=?, complemento=?, bairro=?, cep=?, tipo_usuario=?,id_cidade_cliente=? WHERE id_usuario=?");
+                    "UPDATE tb_usuario SET nome=? , cpf =? , email=? , senha=?, telefone =?, nome_rua=?, numero_rua=?, complemento=?, bairro=?, cep=?, tipo_usuario=?,id_cidade=? WHERE id_usuario=?");
             statement.setString(1, user.getNomeUsuario());
             statement.setString(2, user.getCpf().replaceAll("\\D", ""));
             statement.setString(3, user.getEmail());
@@ -243,4 +247,46 @@ public class UsuarioDAO {
 
         }
     } 
+
+    public List<Usuario> allFuncionarios() {
+        try {
+            listaUsuarios = new ArrayList<Usuario>();
+            conn = ConnectionFactory.getConnection();
+            ResultSet rs = ConnectionFactory.getResultSet(conn, "SELECT * FROM tb_usuario WHERE tipo_usuario='F' OR tipo_usuario='G'");
+            while (rs.next()) {
+                Usuario user = new Usuario();
+                user.setIdUsuario(rs.getInt("id_usuario"));
+                user.setNomeUsuario(rs.getString("nome"));
+                user.setCpf(rs.getString("cpf"));
+                user.setEmail(rs.getString("email"));
+                user.setTelefone(rs.getString("telefone"));
+                user.setNomeRua(rs.getString("nome_rua"));
+                user.setNumeroRua(rs.getInt("numero_rua"));
+                user.setComplemento(rs.getString("complemento"));
+                user.setBairro(rs.getString("bairro"));
+                user.setCep(rs.getString("cep"));
+                user.setTipoUsuario(rs.getString("tipo_usuario"));
+                int idCidade = rs.getInt("id_cidade");
+                Cidade cidade = CidadeFacade.buscarCidadeCliente(idCidade);
+                if(cidade != null){
+                   user.setCidade(cidade);
+                }
+                
+                listaUsuarios.add(user);
+            }
+        } catch (Exception e) {
+            System.out.println("Erro: " + e.getMessage());
+
+        } finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        }
+        return listaUsuarios;
+    }
 }
