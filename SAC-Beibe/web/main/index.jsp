@@ -4,26 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home - Beibe Salão de Beleza</title>
-        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.2/css/all.css' integrity='sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr' crossorigin='anonymous'>
-        
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,900" rel="stylesheet">
-
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,900" rel="stylesheet">
-
-        <link rel="stylesheet" href="http://localhost:8080/SAC-Beibe/css/bootstrap.css">
-        <link rel="stylesheet" href="http://localhost:8080/SAC-Beibe/css/animate.css">
-        <link rel="stylesheet" href="http://localhost:8080/SAC-Beibe/css/owl.carousel.min.css">
-
-        <link rel="stylesheet" href="http://localhost:8080/SAC-Beibe/fonts/ionicons/css/ionicons.min.css">
-        <link rel="stylesheet" href="http://localhost:8080/SAC-Beibe/fonts/fontawesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="http://localhost:8080/SAC-Beibe/fonts/flaticon/font/flaticon.css">
-        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.2/css/all.css' integrity='sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr' crossorigin='anonymous'>        <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' >
-
-        <!-- Theme Style -->
-        <link rel="stylesheet" href="../css/style.css">
-
+        <jsp:include page="../templates/head.jsp"/>
     </head>
     <body>
         <jsp:include page="../templates/nav.jsp"/>
@@ -86,6 +67,6 @@
                 </div>
             </div>
         </section>
-        <c:import  url="../templates/footer.jsp"/>
+        <jsp:include  page="../templates/footer.jsp"/>
     </body>
 </html>

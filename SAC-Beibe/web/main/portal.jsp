@@ -4,18 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Portal Servlet</title>
-        <link rel="stylesheet" href="../css/bootstrap.css">
-        <link rel="stylesheet" href="../css/animate.css">
-        <link rel="stylesheet" href="../css/owl.carousel.min.css">
-
-        <link rel="stylesheet" href="web/../fonts/ionicons/css/ionicons.min.css">
-        <link rel="stylesheet" href="web/../fonts/fontawesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="web/../fonts/flaticon/font/flaticon.css">
-        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.2/css/all.css' integrity='sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr' crossorigin='anonymous'>        <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' >
-        
-        <link rel="stylesheet" href="../css/style.css">
+        <jsp:include page="../templates/head.jsp"/>
         <c:if test="${empty loginBean}">
             <jsp:forward page="index.jsp">
                 <jsp:param name="msg" value="Acesso Inválido"/>
@@ -31,16 +20,15 @@
                <h2 class='text-center col-12-md' style='color:#000'>Bem vindo ao Portal Servlet</h2>
             </div>
         </div>
-                 
+        
+         
+         <div style="margin-left: 37%" class=" w-25 d-flex justify-content-center alert alert-success alert-dismissible fade show" role="alert">
+            <strong><c:out value="${msg}"/> </strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
          <jsp:include page="../templates/footer.jsp"/>
     </body>
 </html>
-<script src="../js/jquery-3.2.1.min.js"></script>
-<script src="../js/jquery-migrate-3.0.0.js"></script>
-<script src="../js/popper.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
-<script src="../js/owl.carousel.min.js"></script>
-<script src="../js/jquery.waypoints.min.js"></script>
-<script src="../js/jquery.stellar.min.js"></script>
-<script src="../js/main.js"></script>
 

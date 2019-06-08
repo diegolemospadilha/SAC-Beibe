@@ -10,7 +10,7 @@
         <c:choose>
             <c:when test="${loginBean.tipoUsuario == 'C'}">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="ClienteServlet?action=list">Alterar Dados <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link active" href="../ClienteServlet?action=formUpdate&id=${loginBean.id}"> Alterar Dados <span class="sr-only">(current)</span></a>
                 </div>
                  <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -47,7 +47,7 @@
                     <a class="nav-link dropdown-toggle" href="courses.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Funcionários</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
                         <a class="dropdown-item" href="courses.html">Cadastrar Funcionário/Gerente</a>
-                        <a class="dropdown-item" href="courses.html">Listar Funcionários</a>
+                        <a class="dropdown-item" href="FuncionarioServlet?action=list">Listar Funcionários</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown">
@@ -75,7 +75,7 @@
         </c:if>
         <c:if test="${empty loginBean}">
             <a class="nav-item nav-link active text-white" href="../main/login.jsp">Log in <span class="sr-only"></span></a>
-            <a class="nav-item nav-link active text-white" href="AtendimentoServlet?action=list">Cadastre-se agora!<span class="sr-only"></span></a>
+            <a class="nav-item nav-link active text-white" href="../ClienteServlet?action=formNew">Cadastre-se agora!<span class="sr-only"></span></a>
         </c:if>
 
     </div>

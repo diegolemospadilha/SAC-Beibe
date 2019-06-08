@@ -62,7 +62,6 @@ public class LoginServlet extends HttpServlet {
                 
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/main/portal.jsp");
                 rd.forward(request, response);
-                response.sendRedirect("/main/portal.jsp");
             }
         }
     }
