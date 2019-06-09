@@ -76,7 +76,7 @@
             <i class="far fa-user-circle fa-2x mt-3"></i>
         </c:if>
         <c:if test="${empty loginBean}">
-            <a class="nav-item nav-link active text-white" href="../main/login.jsp">Login <span class="sr-only"></span></a>
+            <a class="nav-item nav-link active text-white" href="http://localhost:8080/SAC-Beibe/main/login.jsp">Login <span class="sr-only"></span></a>
             <a class="nav-item nav-link active text-white" href="../ClienteServlet?action=formNew">Cadastre-se agora!<span class="sr-only"></span></a>
             </c:if>
 
