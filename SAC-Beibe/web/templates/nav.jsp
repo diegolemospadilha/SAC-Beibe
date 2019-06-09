@@ -36,7 +36,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="courses.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cadastrar</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
-                        <a class="dropdown-item" href="ProdutoServlet?action=new">Cadastrar Produtos</a>
+                        <a class="dropdown-item" href="ProdutoServlet?action=formNew">Cadastrar Produtos</a>
                         <a class="dropdown-item" href="../CategoriaServlet?action=formNew">Cadastrar Categorias</a>
                     </div>
                 </li>

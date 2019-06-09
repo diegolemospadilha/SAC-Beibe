@@ -6,7 +6,7 @@
     <head>
         <jsp:include page="../templates/head.jsp"/>
         <c:choose>
-            <c:when test="${categoria.idCategoria == null}">
+            <c:when test="${produto.idProduto == null}">
                 <c:set var="ac" value="new" />
             </c:when>   
             <c:otherwise>
@@ -28,31 +28,35 @@
         
         <div class="col-sm-6">
              <div class='text-center'> 
-                <h4>Categorias cadastradas no sistema</h4>
+                <h4>Produtos cadastradas no sistema</h4>
              </div></br>
 
             <c:choose>
-                    <c:when test="${empty listaCategorias}" >
+                    <c:when test="${empty listaProdutos}" >
                         <div class="text-center">
-                             <p class="m-5">O sistema não possui categorias cadastrados no momento. Se desejar cadastre um novo cliente agora mesmo!</p>  
+                             <p class="m-5">O sistema não possui produtos cadastrados no momento. Se desejar cadastre um novo cliente agora mesmo!</p>  
                         </div>    
                     </c:when>
             <c:otherwise>
                         
                             <table class='table text-center'>    
                                 <tr>
-                                    <th>id Categoria</th>
-                                    <th>Nome da categoria</th>
+                                    <th>id Produto</th>
+                                    <th>Nome do produto</th>
+                                    <th>Peso em kg/litro</th>
+                                    <th>Categoria</th>
                                     <th>Editar/Excluir</th>
                                 </tr>
 
-                                <c:forEach items="${requestScope.listaCategorias}" var="c">
+                                <c:forEach items="${requestScope.listaProdutos}" var="p">
                                     <tr>
-                                        <td><c:out value="${c.idCategoria}"/></td>
-                                        <td><c:out value="${c.nomeCategoria}"/></td>
+                                        <td><c:out value="${p.idProduto}"/></td>
+                                        <td><c:out value="${p.nomeProduto}"/></td>
+                                        <td><c:out value="${p.pesoProduto}"/></td>
+                                        <td><c:out value="${p.categoria.nomeCategoria}"/></td>
                                         <td>
-                                            <a class="button" href="CategoriaServlet?action=formUpdate&id=${c.idCategoria}" class="mr-3"><button><i class="far fa-edit fa-2x"></button></i></a>
-                                            <a href="#" data-toggle="modal" data-target="#myModal" ><button id="idCategoria" value="${c.idCategoria}"  ><i class="far fa-trash-alt fa-2x"></i></button></a> 
+                                            <a class="button" href="ProdutoServlet?action=formUpdate&id=${p.idProduto}" class="mr-3"><button><i class="far fa-edit fa-2x"></button></i></a>
+                                            <a href="#" data-toggle="modal" data-target="#myModal" ><button id="idProduto" value="${p.idProduto}"  ><i class="far fa-trash-alt fa-2x"></i></button></a> 
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -62,21 +66,29 @@
             </c:choose>
 
             <div class="d-flex justify-content-center">
-                <a href='CategoriaServlet?action=formNew' class='btn btn-primary'>Cadastrar Categoria</a>
+                <a href='ProdutoServlet?action=formNew' class='btn btn-primary'>Cadastrar Produto</a>
             </div>
         </div>
         <c:if test="${showDiv== 'new' || showDiv== 'update' }">
             <div class="ml-5 col-sm-4">
                 <div class="text-center">
-                    <p><c:out value="${(ac == \"update\") ? \"Atualize sua categoria\" : \"Insira aqui uma nova categoria\"}"/></p>
+                    <p><c:out value="${(ac == \"update\") ? \"Atualize seu produto\" : \"Insira aqui um novo produto\"}"/></p>
                 </div> 
                    
-                <form action="CategoriaServlet?action=${ac}" method="POST">
-                    <i class="far fa-calendar-alt p-2"></i> <label>Nome da categoria : </label>
-                    <input  class="form-control mb-3" type="text" name="nomeCategoria" required value="${categoria.nomeCategoria}">
-                     <input type="text" name="id" value="${categoria.idCategoria}" hidden>
+                <form action="ProdutoServlet?action=${ac}" method="POST">
+                    <i class="far fa-calendar-alt p-2"></i> <label>Nome do produto : </label>
+                    <input  class="form-control mb-3" type="text" name="nome_produto" required value="${produto.nomeProduto}">
+                    <i class="far fa-calendar-alt p-2"></i> <label>Peso do produto : </label>
+                    <input  class="form-control mb-3" type="text" name="peso_produto" required value="${produto.pesoProduto}">
+                    <select id="estado" name="categoria_produto" class="form-control">
+                        <option selected="selected">Selecione uma categoria</option>
+                        <c:forEach var="c" items="${listaCategorias}">
+                             <option <c:out value="${(produto.categoria.idCategoria == c.idCategoria) ? \"selected\" : \"\" }"/> value="<c:out value="${c.idCategoria}"/>"><c:out value="${c.nomeCategoria}"/></option>
+                         </c:forEach>
+                    </select></br>
+                    <input type="text" name="id" value="${produto.idProduto}" hidden>
                     <div class="d-flex justify-content-center mt-5">
-                        <a href="CategoriaServlet?action=list" class="btn btn-danger w-25 mr-3" type="submit">Cancelar</a>
+                        <a href="ProdutoServlet?action=list" class="btn btn-danger w-25 mr-3" type="submit">Cancelar</a>
                         <input class="btn btn-primary w-25 ml-3" type="submit" value="<c:out value="${(ac == \"update\") ? \"Update\" : \"Cadastrar\"}"/>"> 
                      </div> 
                 </form>
@@ -101,13 +113,13 @@
 </html>
 <script>
 $("#save").click(function () {
-    var idCategoria = $("#idCategoria").val();
-    var id = "action=remove" + "&id=" + idCategoria;
+    var idProduto = $("#idProduto").val();
+    var id = "action=remove" + "&id=" + idProduto;
     console.log(id);
     $('#myModal').modal('hide');
     $.ajax({
         type: "GET",
-        url: "CategoriaServlet",
+        url: "ProdutoServlet",
         data: id,
         success: function (result) {
             location.reload();
@@ -118,3 +130,4 @@ $("#save").click(function () {
         }
     });
 });</script>
+

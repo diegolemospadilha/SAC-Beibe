@@ -18,9 +18,9 @@ public class CategoriaDAO {
     Connection conn = null;
 
     public List<Categoria> all() throws SQLException {
-        List<Categoria> listaCategorias = new ArrayList<Categoria>();
+        List<Categoria> listaCategorias = null;
         try {
-
+            listaCategorias = new ArrayList<Categoria>();
             conn = ConnectionFactory.getConnection();
             ResultSet rs = ConnectionFactory.getResultSet(conn, "SELECT * FROM tb_categoria ORDER BY id_categoria");
             while (rs.next()) {
@@ -111,15 +111,13 @@ public class CategoriaDAO {
 
         }
     }
-    public void remove(int idCliente) {
+    public void remove(int id) {
         try {
             conn = ConnectionFactory.getConnection();
             PreparedStatement statement = ConnectionFactory.getPreparedStatement(conn,
-                    "DELETE FROM tb_categoria WHERE id_categoria= ?");
-            statement.setInt(1, idCliente);
+                    "DELETE FROM tb_categoria WHERE id_categoria=?");
+            statement.setInt(1, id);
             statement.execute();
-            System.out.println("Categoria "+ idCliente + "removida com sucesso");
-            
         } catch(Exception e){
             e.printStackTrace();
              throw new RuntimeException("Erro ao deletar categoria.");

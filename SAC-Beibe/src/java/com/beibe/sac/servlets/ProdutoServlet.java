@@ -1,7 +1,9 @@
 package com.beibe.sac.servlets;
 
 import com.beibe.sac.facade.CategoriaFacade;
+import com.beibe.sac.facade.ProdutoFacade;
 import com.beibe.sac.model.Categoria;
+import com.beibe.sac.model.Produto;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -21,8 +23,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author lemospadilha
  */
-@WebServlet(urlPatterns = {"/CategoriaServlet"})
-public class CategoriaServlet extends HttpServlet {
+@WebServlet(name = "ProdutoServlet", urlPatterns = {"/ProdutoServlet"})
+public class ProdutoServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,66 +36,76 @@ public class CategoriaServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException, IllegalAccessException, InstantiationException, ClassNotFoundException {
+            throws ServletException, IOException, SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             RequestDispatcher rd;
             String strId, strMessage;
+            Double pesoProduto = 0.0;
             int id = 0;
+            List<Produto> listaProdutos = new ArrayList<Produto>();
             List<Categoria> listaCategorias = new ArrayList<Categoria>();
             String action = request.getParameter("action");
+            Produto produto = null;
             Categoria categoria = null;
             switch (action) {
                 case "list":
-                    listaCategorias = new ArrayList<Categoria>();
-                    listaCategorias = CategoriaFacade.buscarTodos();
-                    request.setAttribute("listaCategorias", listaCategorias);
-                    rd = getServletContext().getRequestDispatcher("/categoria/categoria.jsp");
+                    listaProdutos = new ArrayList<Produto>();
+                    listaProdutos = ProdutoFacade.buscarTodos();
+                    request.setAttribute("listaProdutos", listaProdutos);
+                    rd = getServletContext().getRequestDispatcher("/produto/produto.jsp");
                     rd.forward(request, response);
 
                     break;
 
                 case "formUpdate":
-                    
+
                     strId = request.getParameter("id");
                     id = Integer.parseInt(strId);
-                    categoria = CategoriaFacade.buscarPorId(id);
-                    request.setAttribute("categoria", categoria);
+                    produto = ProdutoFacade.buscarPorId(id);
+                    request.setAttribute("produto", produto);
                     request.setAttribute("showDiv", "update");
+                    listaProdutos = ProdutoFacade.buscarTodos();
+                    request.setAttribute("listaProdutos", listaProdutos);
                     listaCategorias = CategoriaFacade.buscarTodos();
                     request.setAttribute("listaCategorias", listaCategorias);
-                    rd = getServletContext().getRequestDispatcher("/categoria/categoria.jsp");
+                    rd = getServletContext().getRequestDispatcher("/produto/produto.jsp");
                     rd.forward(request, response);
                     break;
 
                 case "remove":
                     strId = request.getParameter("id");
                     id = Integer.parseInt(strId);
-                    CategoriaFacade.remover(id);
-                    strMessage = "Categoria com id " + id + " removida com sucesso!";
+                    ProdutoFacade.remover(id);
+                    strMessage = "Produto com id " + id + " removida com sucesso!";
                     request.setAttribute("msg", strMessage);
-                    listaCategorias = CategoriaFacade.buscarTodos();
-                    request.setAttribute("listaCategorias", listaCategorias);
-                    rd = getServletContext().getRequestDispatcher("/categoria/categoria.jsp");
+                    request.setAttribute("msg", "sasasasa");
+                    listaProdutos = ProdutoFacade.buscarTodos();
+                    request.setAttribute("listaProdutos", listaProdutos);
+                    rd = getServletContext().getRequestDispatcher("/produto/produto.jsp");
                     rd.forward(request, response);
                     break;
 
                 case "update":
                     strId = request.getParameter("id");
                     id = Integer.parseInt(strId);
-                    categoria = new Categoria();
-                    categoria.setIdCategoria(id);
-                    categoria.setNomeCategoria(request.getParameter("nomeCategoria"));
+                    produto = new Produto();
+                    produto.setIdProduto(id);
+                    produto.setNomeProduto(request.getParameter("nome_produto"));
+                    pesoProduto = Double.parseDouble(request.getParameter("peso_produto"));
+                    produto.setPesoProduto(pesoProduto);
+                    id = Integer.parseInt(request.getParameter("categoria_produto"));
+                    categoria = CategoriaFacade.buscarPorId(id);
+                    produto.setCategoria(categoria);
+                    if (!produto.getNomeProduto().equals(null) && produto.getCategoria() != null) {
 
-                    if (!categoria.getNomeCategoria().equals(null)) {
-
-                        if (CategoriaFacade.alterar(categoria) == 0) {
-                            strMessage = "Categoria com id " + categoria.getIdCategoria() + " atualizada com sucesso!";
+                        if (ProdutoFacade.alterar(produto) == 0) {
+                            strMessage = "Produto com id " + produto.getIdProduto() + " atualizado com sucesso!";
                             request.setAttribute("msg", strMessage);
-                            listaCategorias = CategoriaFacade.buscarTodos();
-                            request.setAttribute("listaCategorias", listaCategorias);
-                            rd = getServletContext().getRequestDispatcher("/categoria/categoria.jsp");
+                            listaProdutos = ProdutoFacade.buscarTodos();
+                            request.setAttribute("listaProdutos", listaProdutos);
+                            rd = getServletContext().getRequestDispatcher("/produto/produto.jsp");
                             rd.forward(request, response);
 
                         } else {
@@ -106,23 +118,30 @@ public class CategoriaServlet extends HttpServlet {
 
                 case "formNew":
                     request.setAttribute("showDiv", "new");
+                    listaProdutos = ProdutoFacade.buscarTodos();
+                    request.setAttribute("listaProdutos", listaProdutos);
                     listaCategorias = CategoriaFacade.buscarTodos();
                     request.setAttribute("listaCategorias", listaCategorias);
-                    rd = getServletContext().getRequestDispatcher("/categoria/categoria.jsp");
+                    rd = getServletContext().getRequestDispatcher("/produto/produto.jsp");
                     rd.forward(request, response);
                     break;
 
                 case "new":
-                    categoria = new Categoria();
-                    categoria.setNomeCategoria(request.getParameter("nomeCategoria"));
-
-                    if (!categoria.getNomeCategoria().equals(null)) {
-                        CategoriaFacade.inserir(categoria);
-                        strMessage = "Categoria " + categoria.getNomeCategoria() + " criada com sucesso";
+                    produto = new Produto();
+                    produto.setIdProduto(id);
+                    produto.setNomeProduto(request.getParameter("nome_produto"));
+                    pesoProduto = Double.parseDouble(request.getParameter("peso_produto"));
+                    produto.setPesoProduto(pesoProduto);
+                    id = Integer.parseInt(request.getParameter("categoria_produto"));
+                    categoria = CategoriaFacade.buscarPorId(id);
+                    produto.setCategoria(categoria);
+                    if (!produto.getNomeProduto().equals(null) && produto.getCategoria() != null) {
+                        ProdutoFacade.inserir(produto);
+                        strMessage = "Produto " + produto.getNomeProduto() + " cadastrado com sucesso";
                         request.setAttribute("msg", strMessage);
-                        listaCategorias = CategoriaFacade.buscarTodos();
-                        request.setAttribute("listaCategorias", listaCategorias);
-                        rd = getServletContext().getRequestDispatcher("/categoria/categoria.jsp");
+                        listaProdutos = ProdutoFacade.buscarTodos();
+                        request.setAttribute("listaProdutos", listaProdutos);
+                        rd = getServletContext().getRequestDispatcher("/produto/produto.jsp");
                         rd.forward(request, response);
                     } else {
                         request.setAttribute("msg", "Acesso Inválido  para cadastrar usuário. ");
@@ -150,13 +169,13 @@ public class CategoriaServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(CategoriaServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(CategoriaServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProdutoServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            Logger.getLogger(CategoriaServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProdutoServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(ProdutoServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CategoriaServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProdutoServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -174,13 +193,13 @@ public class CategoriaServlet extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(CategoriaServlet.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(CategoriaServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProdutoServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            Logger.getLogger(CategoriaServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProdutoServlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(ProdutoServlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CategoriaServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProdutoServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

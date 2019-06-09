@@ -36,7 +36,7 @@ public class AtendimentoDAO {
                 LocalDateTime d = data.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
                 atendimento.setDataHoraAtendimento(d);
                 atendimento.setDescricaoAtendimento(rs.getString("desc_atendimento"));
-                Produto produto = ProdutoFacade.buscarProdutoPorId(rs.getInt("id_produto"));
+                Produto produto = ProdutoFacade.buscarPorId(rs.getInt("id_produto"));
                 atendimento.setProduto(produto);
                 atendimento.setSituacao(rs.getString("res_atendimento"));
                 id = rs.getInt("id_usuario");
@@ -102,7 +102,7 @@ public class AtendimentoDAO {
                 LocalDateTime d = data.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
                 atendimento.setDataHoraAtendimento(d);
                 atendimento.setDescricaoAtendimento(rs.getString("descricao_atendimento"));
-                Produto produto = ProdutoFacade.buscarProdutoPorId(rs.getInt("id_produto"));
+                Produto produto = ProdutoFacade.buscarPorId(rs.getInt("id_produto"));
                 atendimento.setProduto(produto);
                 atendimento.setSituacao(rs.getString("res_atendimento"));
                 id = rs.getInt("id_usuario");
@@ -147,7 +147,7 @@ public class AtendimentoDAO {
                 id = rs.getInt("id_usuario");
                 Usuario usuario = UsuarioFacade.buscarPorId(id, "cliente");
                 atendimento.setUsuario(usuario);
-                Produto produto = ProdutoFacade.buscarProdutoPorId(rs.getInt("id_produto"));
+                Produto produto = ProdutoFacade.buscarPorId(rs.getInt("id_produto"));
                 atendimento.setProduto(produto);
                 atendimento.setSituacao(rs.getString("res_atendimento"));
                 atendimento.setUsuario(usuario);

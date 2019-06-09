@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.beibe.sac.model;
 
 /**
@@ -12,8 +7,9 @@ package com.beibe.sac.model;
 public class Produto {
     private int idProduto;
     private String nomeProduto;
-    private Categoria nomeCategoria;
     private double pesoProduto;
+    private Categoria categoria;
+    
     public Produto() {
     }
 
@@ -33,12 +29,12 @@ public class Produto {
         this.nomeProduto = nomeProduto;
     }
 
-    public Categoria getNomeCategoria() {
-        return nomeCategoria;
+    public Categoria getCategoria() {
+        return categoria;
     }
 
-    public void setNomeCategoria(Categoria nomeCategoria) {
-        this.nomeCategoria = nomeCategoria;
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
     }
 
     public double getPesoProduto() {
