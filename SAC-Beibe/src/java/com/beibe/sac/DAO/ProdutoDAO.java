@@ -64,6 +64,7 @@ public class ProdutoDAO {
             if (rs.next()) {
                 produto.setIdProduto(rs.getInt("id_produto"));
                 produto.setNomeProduto(rs.getString("nome_produto"));
+
                 produto.setPesoProduto(rs.getDouble("peso_produto"));
                 int id = rs.getInt("id_categoria");
                 Categoria cat = CategoriaFacade.buscarPorId(id);

@@ -8,7 +8,20 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul class="navbar-nav">
             <c:choose>
-
+                <c:when test="${loginBean.tipoUsuario == 'Cliente'}">
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link active" href="../ClienteServlet?action=formUpdate&id=${loginBean.id}"> Alterar Dados <span class="sr-only">(current)</span></a>
+                    </div>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Atendimentos
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="AtendimentoServlet?action=create  ">Criar atendimento</a>
+                            <a class="dropdown-item" href="AtendimentoServlet?action=list">Meus atendimentos</a>
+                        </div>
+                    </li>
+                </c:when>
 
                 <c:when test="${loginBean.tipoUsuario == 'Funcionario'}">
                     <li class="nav-item dropdown">
@@ -62,6 +75,46 @@
                         </div>
                     </li>
 
+
+                </c:when>
+                <c:when test="${loginBean.tipoUsuario == 'F'}">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Atendimentos
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="AtendimentoServlet?action=listAberto">Listar todos os atendimentos em aberto</a>
+                            <a class="dropdown-item" href="AtendimentoServlet?action=listTodosAtendimentos">Listar todos os atendimentos</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="courses.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cadastrar</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown04">
+                            <a class="dropdown-item" href="courses.html">Cadastrar Produtos</a>
+                            <a class="dropdown-item" href="courses.html">Cadastrar Categorias</a>
+                        </div>
+                    </li>
+                </c:when>
+
+                <c:when test="${loginBean.tipoUsuario == 'G'}">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="courses.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Funcionários</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown04">
+                            <a class="dropdown-item" href="courses.html">Cadastrar Funcionário/Gerente</a>
+                            <a class="dropdown-item" href="FuncionarioServlet?action=list">Listar Funcionários</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="courses.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Atendimentos</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdown04">
+                            <a class="dropdown-item" href="AtendimentoServlet?action=listAberto">Listar todos os atendimentos em aberto</a>
+                            <a class="dropdown-item" href="AtendimentoServlet?action=listTodosAtendimentos">Listar todos os atendimentos</a>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link dropdown-toggle" href="courses.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gerar Relatórios</a>
+                    </li>
+                    >>>>>>> origin/jean
                 </c:when>
 
             </c:choose>
@@ -71,8 +124,9 @@
     </div>
     <div class="d-flex flex-row-reverse text-white">
         <c:if test="${!empty loginBean}">
-            <a href='../LogoutServlet' class='btn btn-primary btn-sm h-50 mt-3 mr-3'>SAIR</a>
-            <span class="m-3"> <c:out value="${loginBean.nomeUsuario}"/> </span>
+
+            <a href='LogoutServlet' class='btn btn-primary btn-sm  mt-3 mr-3 h-50'>SAIR</a>
+            <span class="m  r-3 m-3"> <c:out value="${loginBean.nomeUsuario}"/> </span>
             <i class="far fa-user-circle fa-2x mt-3"></i>
         </c:if>
         <c:if test="${empty loginBean}">

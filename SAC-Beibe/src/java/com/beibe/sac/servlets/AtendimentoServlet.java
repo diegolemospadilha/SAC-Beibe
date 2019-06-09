@@ -1,4 +1,4 @@
-package com.beibe.sac.servlet;
+package com.beibe.sac.servlets;
 
 import com.beibe.sac.beans.LoginBean;
 import com.beibe.sac.facade.AtendimentoFacade;
@@ -162,7 +162,6 @@ public class AtendimentoServlet extends HttpServlet {
 
                         listaAtendimentos = AtendimentoFacade.buscarTodosAtendimentos();
                         if (listaAtendimentos != null) {
-                            System.out.println("atendimento");
                             request.setAttribute("todosAtendendimentos", listaAtendimentos);
                             rd = getServletContext().getRequestDispatcher("/atendimento/listaTodosAtendimentos.jsp");
                             rd.forward(request, response);

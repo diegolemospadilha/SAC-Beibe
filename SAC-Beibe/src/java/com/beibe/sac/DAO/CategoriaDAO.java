@@ -131,8 +131,6 @@ public class CategoriaDAO {
                     throw new RuntimeException("Erro ao fechar conexão.");
                 }
             }
-
         }
     }
-
 }

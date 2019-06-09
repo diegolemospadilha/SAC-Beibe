@@ -39,19 +39,21 @@ public class AtendimentoDAO {
                 Date data = rs.getTimestamp("data_atendimento");
                 LocalDateTime d = data.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
                 atendimento.setDataHoraAtendimento(d);
+
                 Produto produto = ProdutoFacade.buscarPorId(rs.getInt("id_produto"));
                 atendimento.setDescricaoAtendimento(rs.getString("descricao_atendimento"));
                 id = rs.getInt("id_cliente");
                 Usuario usuario = UsuarioFacade.buscarPorId(id, "Cliente");
                 atendimento.setUsuario(usuario);
+                atendimento.setDescricaoAtendimento(rs.getString("descricao_atendimento"));
                 atendimento.setProduto(produto);
                 atendimento.setSolucaoApresentada(rs.getString("solucao_apresentada"));
                 atendimento.setSituacao(rs.getString("situacao_atendimento"));
-                atendimento.setUsuario(usuario);
                 id = rs.getInt("id_tipo_atendimento");
                 TipoAtendimento tipoAtendimento = TipoAtendimentoFacade.buscaTipoAtendimentoPorId(id);
                 atendimento.setTipoAtendimento(tipoAtendimento);
                 int weeks = (int) d.until(now(), ChronoUnit.WEEKS);
+
                 if (weeks > 1) {
                     atendimento.setPrioridade(1);
                 }
@@ -91,6 +93,7 @@ public class AtendimentoDAO {
                 Usuario usuario = UsuarioFacade.buscarPorId(id, "Cliente");
                 atendimento.setUsuario(usuario);
                 Produto produto = ProdutoFacade.buscarPorId(rs.getInt("id_produto"));
+
                 atendimento.setProduto(produto);
                 atendimento.setSolucaoApresentada(rs.getString("solucao_apresentada"));
                 atendimento.setSituacao(rs.getString("situacao_atendimento"));
