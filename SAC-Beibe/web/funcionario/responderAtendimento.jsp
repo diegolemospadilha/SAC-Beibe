@@ -58,9 +58,11 @@
                         <td><c:out value="${atendimento.usuario.nomeUsuario}"/></td>
                     </tr>
                     <tr>
-                        <c:if test="${loginBean.tipoUsuario == 'F'}">
-                            <td><c:out value="Responder Cliente"/></td>
-                            <td>  <textarea class="form-control" id="exampleTextarea" name="solucao"  rows="3"></textarea></td>
+                        <c:if test="${atendimento.situacao == 'N'}">
+                            <c:if test="${loginBean.tipoUsuario == 'F' }">
+                                <td><c:out value="Responder Cliente"/></td>
+                                <td>  <textarea class="form-control" id="exampleTextarea" name="solucao"  rows="3"></textarea></td>
+                                </c:if>
                             </c:if>
                             <c:if test="${loginBean.tipoUsuario == 'G'}">
                             <td><c:out value="Responder Cliente"/></td>
@@ -75,9 +77,9 @@
                 <div class="d-flex justify-content-center">
                     <a href='AtendimentoServlet?action=listAberto' class='btn btn-primary col-md-4 ml-2' style='float: right; '>Voltar</a>
 
-
-                    <input  type="submit" class='btn btn-secondary ml-2 ' id="idAtedimento"  value=" Enviar"  >
-
+                    <c:if test="${atendimento.situacao == 'N'}">
+                        <input  type="submit" class='btn btn-secondary ml-2 ' id="idAtedimento"  value=" Enviar"  >
+                    </c:if>
 
 
                 </div>
