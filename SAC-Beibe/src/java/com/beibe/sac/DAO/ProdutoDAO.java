@@ -16,6 +16,7 @@ import java.util.List;
  * @author lemospadilha
  */
 public class ProdutoDAO {
+
     Connection conn = null;
 
     public List<Produto> all() throws SQLException {
@@ -28,10 +29,11 @@ public class ProdutoDAO {
                 Produto produto = new Produto();
                 produto.setIdProduto(rs.getInt("id_produto"));
                 produto.setNomeProduto(rs.getString("nome_produto"));
-                produto.setPesoProduto(rs.getDouble("peso_produto"));
-                int id = rs.getInt("id_categoria");
-                Categoria cat = CategoriaFacade.buscarPorId(id);
-                produto.setCategoria(cat);
+
+                produto.setPesoProduto(rs.getInt("peso_produto"));
+                Categoria c = CategoriaFacade.buscarPorId(rs.getInt("id_categoria"));
+                produto.setCategoria(c);
+
                 listaProdutos.add(produto);
             }
 
@@ -47,10 +49,11 @@ public class ProdutoDAO {
         return listaProdutos;
 
     }
-    
-    public Produto findById(int idProduto) throws SQLException{
-         conn = null;
-         Produto produto = new Produto();
+
+    public Produto findProdutoById(int idProduto) throws SQLException {
+        conn = null;
+        Produto produto = new Produto();
+
         try {
             conn = ConnectionFactory.getConnection();
             PreparedStatement statement = ConnectionFactory.getPreparedStatement(conn,
@@ -65,8 +68,9 @@ public class ProdutoDAO {
                 int id = rs.getInt("id_categoria");
                 Categoria cat = CategoriaFacade.buscarPorId(id);
                 produto.setCategoria(cat);
+
             } else {
-               produto = null;
+                produto = null;
             }
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
@@ -78,16 +82,16 @@ public class ProdutoDAO {
             return produto;
         }
     }
-    
+
     public void insert(Produto produto) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 
         try {
             conn = ConnectionFactory.getConnection();
-            PreparedStatement statement = ConnectionFactory.getPreparedStatement(conn, 
+            PreparedStatement statement = ConnectionFactory.getPreparedStatement(conn,
                     "INSERT INTO tb_produto values (null,?,?,?)");
             statement.setString(1, produto.getNomeProduto());
             statement.setDouble(2, produto.getPesoProduto());
-            statement.setInt(3, produto.getCategoria().getIdCategoria());      
+            statement.setInt(3, produto.getCategoria().getIdCategoria());
             statement.execute();
         } catch (Exception e) {
             System.out.println("Erro " + e.getMessage());
@@ -98,35 +102,35 @@ public class ProdutoDAO {
 
         }
     }
-    
+
     public int alterar(Produto produto) {
-       try {
+        try {
             conn = ConnectionFactory.getConnection();
             PreparedStatement statement = ConnectionFactory.getPreparedStatement(conn,
                     "UPDATE tb_produto SET nome_produto= ?, peso_produto =?, id_categoria=? WHERE id_produto=?");
-            statement.setString(1,produto.getNomeProduto());
+            statement.setString(1, produto.getNomeProduto());
             statement.setDouble(2, produto.getPesoProduto());
-            statement.setInt(3,produto.getCategoria().getIdCategoria());
-            statement.setInt(4,produto.getIdProduto());
+            statement.setInt(3, produto.getCategoria().getIdCategoria());
+            statement.setInt(4, produto.getIdProduto());
             statement.executeUpdate();
-            System.out.println("Categoria de id: " +produto.getIdProduto()+ " alterado com sucesso");
-            return 0;   
-        } catch(Exception e){
+            System.out.println("Categoria de id: " + produto.getIdProduto() + " alterado com sucesso");
+            return 0;
+        } catch (Exception e) {
             e.printStackTrace();
             return 1;
             //throw new RuntimeException("Erro ao atualizar cliente." + e.getMessage());
-        }finally {
+        } finally {
             if (conn != null) {
                 try {
                     conn.close();
                 } catch (SQLException ex) {
-                   throw new RuntimeException("Erro ao fechar conexão.");
+                    throw new RuntimeException("Erro ao fechar conexão.");
                 }
             }
 
         }
     }
-    
+
     public void remove(int id) {
         try {
             conn = ConnectionFactory.getConnection();
@@ -134,16 +138,16 @@ public class ProdutoDAO {
                     "DELETE FROM tb_produto WHERE id_produto= ?");
             statement.setInt(1, id);
             statement.execute();
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-             throw new RuntimeException("Erro ao deletar produto.");
-            
-        }finally {
+            throw new RuntimeException("Erro ao deletar produto.");
+
+        } finally {
             if (conn != null) {
                 try {
                     conn.close();
                 } catch (SQLException ex) {
-                   throw new RuntimeException("Erro ao fechar conexão.");
+                    throw new RuntimeException("Erro ao fechar conexão.");
                 }
             }
 

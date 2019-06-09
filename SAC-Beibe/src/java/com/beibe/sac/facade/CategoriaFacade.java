@@ -6,12 +6,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class CategoriaFacade {
-    
-    private static final CategoriaDAO categoriaDAO= new CategoriaDAO();
-            
+
+    private static final CategoriaDAO categoriaDAO = new CategoriaDAO();
+
     public static List<Categoria> buscarTodos() throws SQLException {
-       List<Categoria> categorias = categoriaDAO.all();
-       return categorias;
+        List<Categoria> categorias = categoriaDAO.all();
+        return categorias;
     }
 
     public static Categoria buscarPorId(int id) throws SQLException {
@@ -30,5 +30,4 @@ public class CategoriaFacade {
     public static void inserir(Categoria categoria) throws IllegalAccessException, InstantiationException, ClassNotFoundException, SQLException {
         categoriaDAO.insert(categoria);
     }
-    
 }
