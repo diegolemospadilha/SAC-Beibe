@@ -1,5 +1,7 @@
 package com.beibe.sac.DAO;
 
+import com.beibe.sac.facade.CategoriaFacade;
+import com.beibe.sac.model.Categoria;
 import com.beibe.sac.model.Produto;
 import com.beibe.sac.utils.ConnectionFactory;
 import java.sql.Connection;
@@ -14,6 +16,7 @@ import java.util.List;
  * @author lemospadilha
  */
 public class ProdutoDAO {
+
     Connection conn = null;
 
     public List<Produto> all() throws SQLException {
@@ -26,7 +29,9 @@ public class ProdutoDAO {
                 Produto produto = new Produto();
                 produto.setIdProduto(rs.getInt("id_produto"));
                 produto.setNomeProduto(rs.getString("nome_produto"));
-                produto.setPesoProduto(rs.getDouble("peso"));
+                produto.setPesoProduto(rs.getInt("peso_produto"));
+                Categoria c = CategoriaFacade.buscaCategoriaPorId(rs.getInt("id_categoria"));
+                produto.setNomeCategoria(c);
                 listaProdutos.add(produto);
             }
 
@@ -42,10 +47,10 @@ public class ProdutoDAO {
         return listaProdutos;
 
     }
-    
-    public Produto findProdutoById(int idProduto) throws SQLException{
-         conn = null;
-         Produto produto = new Produto();
+
+    public Produto findProdutoById(int idProduto) throws SQLException {
+        conn = null;
+        Produto produto = new Produto();
         try {
             conn = ConnectionFactory.getConnection();
             PreparedStatement statement = ConnectionFactory.getPreparedStatement(conn,
@@ -54,11 +59,10 @@ public class ProdutoDAO {
             statement.execute();
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-                produto.setIdProduto(rs.getInt("id_produto")); 
+                produto.setIdProduto(rs.getInt("id_produto"));
                 produto.setNomeProduto(rs.getString("nome_produto"));
-                produto.setPesoProduto(rs.getDouble("peso"));
             } else {
-               produto = null;
+                produto = null;
             }
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());

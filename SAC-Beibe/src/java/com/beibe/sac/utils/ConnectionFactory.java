@@ -1,4 +1,3 @@
-
 package com.beibe.sac.utils;
 
 import java.sql.Connection;
@@ -13,18 +12,20 @@ import java.sql.Statement;
  * @author lemospadilha
  */
 public class ConnectionFactory {
-    public static Connection getConnection() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+
+    public static Connection getConnection() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
         String str = "jdbc:mysql://localhost/beibe?autoReconnect=true&useSSL=false";
-        Connection connection = DriverManager.getConnection(str, "root", "");
+        Connection connection = DriverManager.getConnection(str, "dev", "colodedeus");
         return connection;
     }
-        public static ResultSet getResultSet(Connection conn, String sql) throws SQLException {
-		Statement statement = conn.createStatement();
-		return statement.executeQuery(sql);
+
+    public static ResultSet getResultSet(Connection conn, String sql) throws SQLException {
+        Statement statement = conn.createStatement();
+        return statement.executeQuery(sql);
     }
-	
+
     public static PreparedStatement getPreparedStatement(Connection conn, String sql) throws SQLException {
-		return conn.prepareStatement(sql);
+        return conn.prepareStatement(sql);
     }
 }
