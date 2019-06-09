@@ -27,8 +27,8 @@
 <link rel="stylesheet" href="http://localhost:8081/SAC-Beibe/css/animate.css">
 <link rel="stylesheet" href="http://localhost:8081/SAC-Beibe/css/owl.carousel.min.css">
 
-<link rel="stylesheet" href="../fonts/ionicons/css/ionicons.min.css">
-<link rel="stylesheet" href="../fonts/fontawesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="../fonts/flaticon/font/flaticon.css">
+ <link rel="stylesheet" href="web/../fonts/ionicons/css/ionicons.min.css">
+ <link rel="stylesheet" href="web/../fonts/fontawesome/css/font-awesome.min.css">
+ <link rel="stylesheet" href="web/../fonts/flaticon/font/flaticon.css">
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script src="http://localhost:8081/SAC-Beibe/js/lib.js" type="text/javascript"></script>

@@ -19,16 +19,16 @@
         <div class="d-flex justify-content-center mt-3">
             <ul class="list-group list-group-horizontal-sm">
                 <li class="list-group-item">
-                    <a href="GeradorRelatorioServlet?action=listarClientes" class="m-5 btn btn-link">Listar todos os clientes</a>
+                    <a href="GeradorRelatorioServlet?action=listarTodosFuncionarios" class="m-5 btn btn-link">Listar todos os funcionários</a>
                 </li>
                 <li class="list-group-item">
-                    <a href="GeradorRelatorioServlet?action=listarPorPeriodo" class="m-5 btn btn-link">Listar atendimentos por período</a>
+                    <a href="GeradorRelatorioServlet?action=listarPorPeriodo" class="m-5 btn btn-link">Listar atendimentos em aberto por período</a>
                 </li>
                 <li class="list-group-item">
-                    <a href="GeradorRelatorioServlet?action=listarAtendimentosResolvidos" class="m-5 btn btn-link">Listar todos os atendimentos resolvidos</a>
+                    <a href="GeradorRelatorioServlet?action=listarAtendimentosResolvidos" class="m-5 btn btn-link">Produtos mais reclamados</a>
                 </li>
                 <li class="list-group-item">
-                    <a href="GeradorRelatorioServlet?action=tipoAtendimento" class="m-5 btn btn-link">Listar Atendimentos por tipo de atendimento</a>
+                    <a href="GeradorRelatorioServlet?action=tipoAtendimento" class="m-5 btn btn-link">Relatório de reclamações</a>
                 </li>
             </ul>
         </div></br>
