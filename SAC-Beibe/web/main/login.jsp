@@ -40,7 +40,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-5 box">
                         <h2 class="mb-5 text-center">Acesse nosso sistema com sua conta</h2>
-                        <form action="../LoginServlet" method="POST">
+                        <form action="  LoginServlet" method="POST">
                             <div class="row">
                                 <div class="col-md-12 form-group">
                                     <i class="fas fa-user p-2"></i><label for="login">Username</label>

@@ -30,8 +30,8 @@ public class LogoutServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-             HttpSession session = request.getSession(false);
-           
+            HttpSession session = request.getSession(false);
+
             if (session.getAttribute("loginBean") != null) {
                 session.removeAttribute("loginBean");
                 session.invalidate();
