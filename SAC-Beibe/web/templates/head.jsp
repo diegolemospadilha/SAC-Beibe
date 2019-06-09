@@ -13,14 +13,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 
-<script src="http://localhost:8081/SAC-Beibe/js/jquery-3.2.1.min.js"></script>
-<script src="http://localhost:8081/SAC-Beibe/js/jquery-migrate-3.0.0.js"></script>
-<script src="http://localhost:8081/SAC-Beibe/js/popper.min.js"></script>
-<script src="http://localhost:8081/SAC-Beibe/js/bootstrap.min.js"></script>
-<script src="http://localhost:8081/SAC-Beibe/js/owl.carousel.min.js"></script>
-<script src="http://localhost:8081/SAC-Beibe/js/jquery.waypoints.min.js"></script>
-<script src="http://localhost:8081/SAC-Beibe/js/jquery.stellar.min.js"></script>
-<script src="http://localhost:8081/SAC-Beibe/js/main.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,900" rel="stylesheet">
 
 <link rel="stylesheet" href="http://localhost:8081/SAC-Beibe/css/bootstrap.css">
