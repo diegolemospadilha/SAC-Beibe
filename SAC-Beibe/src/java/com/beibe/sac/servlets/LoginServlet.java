@@ -45,9 +45,9 @@ public class LoginServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String usuario = request.getParameter("login");
             String senha = request.getParameter("passwd");
-            
+
             Usuario user = LoginFacade.buscarUsuario(usuario, senha);
-            
+
             HttpSession session = request.getSession();
             if (user == null) {
                 request.setAttribute("msg", "Usuário ou senha incorretos. ");
@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
                 loginBean.setNomeUsuario(user.getNomeUsuario());
                 loginBean.setTipoUsuario(user.getTipoUsuario());
                 session.setAttribute("loginBean", loginBean);
-                
+
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/main/portal.jsp");
                 rd.forward(request, response);
             }

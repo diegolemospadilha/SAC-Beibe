@@ -1,4 +1,3 @@
-
 package com.beibe.sac.DAO;
 
 import com.beibe.sac.model.Categoria;
@@ -15,6 +14,7 @@ import java.util.List;
  * @author lemospadilha
  */
 public class CategoriaDAO {
+
     Connection conn = null;
 
     public List<Categoria> all() throws SQLException {
@@ -24,7 +24,7 @@ public class CategoriaDAO {
             conn = ConnectionFactory.getConnection();
             ResultSet rs = ConnectionFactory.getResultSet(conn, "SELECT * FROM tb_categoria ORDER BY id_categoria");
             while (rs.next()) {
-                Categoria categoria= new Categoria();
+                Categoria categoria = new Categoria();
                 categoria.setIdCategoria(rs.getInt("id_categoria"));
                 categoria.setNomeCategoria(rs.getString("nome_categoria"));
                 listaCategorias.add(categoria);
@@ -40,7 +40,7 @@ public class CategoriaDAO {
         }
         return listaCategorias;
     }
- 
+
     public Categoria findById(int id) throws SQLException {
         Categoria categoria = new Categoria();
         try {
@@ -86,31 +86,32 @@ public class CategoriaDAO {
     }
 
     public int alterar(Categoria categoria) {
-       try {
+        try {
             conn = ConnectionFactory.getConnection();
             PreparedStatement statement = ConnectionFactory.getPreparedStatement(conn,
                     "UPDATE tb_categoria SET nome_categoria=?  WHERE id_categoria=?");
             statement.setString(1, categoria.getNomeCategoria());
             statement.setInt(2, categoria.getIdCategoria());
             statement.executeUpdate();
-            System.out.println("Categoria de id: " + categoria.getIdCategoria()+ "alterado com sucesso");
+            System.out.println("Categoria de id: " + categoria.getIdCategoria() + "alterado com sucesso");
             return 0;
-            
-        } catch(Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
             return 1;
             //throw new RuntimeException("Erro ao atualizar cliente." + e.getMessage());
-        }finally {
+        } finally {
             if (conn != null) {
                 try {
                     conn.close();
                 } catch (SQLException ex) {
-                   throw new RuntimeException("Erro ao fechar conexão.");
+                    throw new RuntimeException("Erro ao fechar conexão.");
                 }
             }
 
         }
     }
+
     public void remove(int id) {
         try {
             conn = ConnectionFactory.getConnection();
@@ -118,19 +119,18 @@ public class CategoriaDAO {
                     "DELETE FROM tb_categoria WHERE id_categoria=?");
             statement.setInt(1, id);
             statement.execute();
-        } catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-             throw new RuntimeException("Erro ao deletar categoria.");
-            
-        }finally {
+            throw new RuntimeException("Erro ao deletar categoria.");
+
+        } finally {
             if (conn != null) {
                 try {
                     conn.close();
                 } catch (SQLException ex) {
-                   throw new RuntimeException("Erro ao fechar conexão.");
+                    throw new RuntimeException("Erro ao fechar conexão.");
                 }
             }
-
         }
     }
 }
