@@ -75,7 +75,7 @@ public class ClienteServlet extends HttpServlet {
                     case "show":
                         strId = request.getParameter("id");
                         id = Integer.parseInt(strId);
-                        user = UsuarioFacade.buscarPorId(id, "cliente");
+                        user = UsuarioFacade.buscarPorId(id, "Cliente");
                         if (user != null) {
                             request.setAttribute("user", user);
                             rd = getServletContext().getRequestDispatcher("/cliente/clienteVisualizar.jsp");
@@ -136,7 +136,7 @@ public class ClienteServlet extends HttpServlet {
 
                         if (!user.getNomeUsuario().equals(null) && !user.getCpf().equals(null) && !user.getEmail().equals(null)) {
 
-                            if (UsuarioFacade.alterar(user, "C") == 0) {
+                            if (UsuarioFacade.alterar(user, "Cliente") == 0) {
                                 System.out.println(user.getNomeUsuario());
                                 System.out.println(user.getEmail());
                                 request.setAttribute("msg", user.getNomeUsuario() + ", sua conta foi atualizada com sucesso");
@@ -181,7 +181,7 @@ public class ClienteServlet extends HttpServlet {
                         user.setCidade(cidade);
 
                         if (!user.getNomeUsuario().equals(null) && !user.getCpf().equals(null) && !user.getEmail().equals(null)) {
-                            UsuarioFacade.inserir(user, "C");
+                            UsuarioFacade.inserir(user, "Cliente");
                             String str = user.getNomeUsuario() + ", sua conta foi criada com sucesso";
                             request.setAttribute("msg", str);
                             rd = getServletContext().getRequestDispatcher("/main/portal.jsp");

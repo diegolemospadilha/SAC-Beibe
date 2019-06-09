@@ -4,11 +4,11 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Beibe Salão de Beleza</a>
+    <a class="navbar-brand" href="main/index.jsp">Beibe Salão de Beleza</a>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul class="navbar-nav">
         <c:choose>
-            <c:when test="${loginBean.tipoUsuario == 'C'}">
+            <c:when test="${loginBean.tipoUsuario == 'Cliente'}">
                 <div class="navbar-nav">
                     <a class="nav-item nav-link active" href="../ClienteServlet?action=formUpdate&id=${loginBean.id}"> Alterar Dados <span class="sr-only">(current)</span></a>
                 </div>
@@ -23,7 +23,7 @@
                 </li>
                 
             </c:when>
-            <c:when test="${loginBean.tipoUsuario == 'F'}">
+            <c:when test="${loginBean.tipoUsuario == 'Funcionario'}">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       Atendimentos
@@ -36,13 +36,13 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="courses.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cadastrar</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
-                        <a class="dropdown-item" href="courses.html">Cadastrar Produtos</a>
-                        <a class="dropdown-item" href="courses.html">Cadastrar Categorias</a>
+                        <a class="dropdown-item" href="ProdutoServlet?action=new">Cadastrar Produtos</a>
+                        <a class="dropdown-item" href="../CategoriaServlet?action=formNew">Cadastrar Categorias</a>
                     </div>
                 </li>
             </c:when>
                 
-            <c:when test="${loginBean.tipoUsuario == 'G'}">
+            <c:when test="${loginBean.tipoUsuario == 'Gerente'}">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="courses.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Funcionários</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -58,7 +58,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link dropdown-toggle" href="courses.html" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Gerar Relatórios</a>
+                    <a class="nav-link" href="relatorio.jsp" id="dropdown04" aria-haspopup="true" aria-expanded="false">Gerar Relatórios</a>
                 </li>
             </c:when>
 
@@ -67,10 +67,10 @@
                 
         </ul>
     </div>
-    <div class="d-flex flex-row-reverse mt-4 text-white">
+    <div class="d-flex flex-row-reverse text-white">
         <c:if test="${!empty loginBean}">
-            <a href='../LogoutServlet' class='btn btn-primary btn-sm  mt-3 mr-3'>SAIR</a>
-            <span class="m  r-3 m-3"> <c:out value="${loginBean.nomeUsuario}"/> </span>
+            <a href='../LogoutServlet' class='btn btn-primary btn-sm h-50 mt-3 mr-3'>SAIR</a>
+            <span class="m-3"> <c:out value="${loginBean.nomeUsuario}"/> </span>
             <i class="far fa-user-circle fa-2x mt-3"></i>
         </c:if>
         <c:if test="${empty loginBean}">

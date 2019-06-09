@@ -3,28 +3,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Home - Beibe Salão de Beleza</title>
-        <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.2/css/all.css' integrity='sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr' crossorigin='anonymous'>
-        <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' >
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,900" rel="stylesheet">
-
-        <link rel="stylesheet" href="../css/bootstrap.css">
-        <link rel="stylesheet" href="../css/animate.css">
-        <link rel="stylesheet" href="../css/owl.carousel.min.css">
-
-        <link rel="stylesheet" href="web/../fonts/ionicons/css/ionicons.min.css">
-        <link rel="stylesheet" href="web/../fonts/fontawesome/css/font-awesome.min.css">
-        <link rel="stylesheet" href="web/../fonts/flaticon/font/flaticon.css">
-
-        <!-- Theme Style -->
-        <link rel="stylesheet" href="../css/style.css">
+        <jsp:include page="../templates/head.jsp"/>
     </head>
     <body class="bg-white">
         <jsp:include page="../templates/nav.jsp"/>
-        <section class="site-hero site-hero-innerpage overlay" data-stellar-background-ratio="0.5" style="background-image: url(../images/big_image_1.jpg);">
+        <section class="site-hero site-hero-innerpage overlay" data-stellar-background-ratio="0.5" style="background-image: url(http://localhost:8081/SAC-Beibe/images/big_image_1.jpg);">
         <div class="container">
             <div class="row align-items-center site-hero-inner justify-content-center">
                 <div class="col-md-8 text-center">
