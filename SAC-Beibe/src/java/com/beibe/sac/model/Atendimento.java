@@ -1,8 +1,11 @@
 package com.beibe.sac.model;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 public class Atendimento {
+
     private int idAtendimento;
     private LocalDateTime dataHoraAtendimento;
     private String descricaoAtendimento;
@@ -11,8 +14,21 @@ public class Atendimento {
     private Produto produto;
     private TipoAtendimento tipoAtendimento;
     private Usuario usuario;
-    
-    public Atendimento(){
+    private int prioridade;
+
+    public int getPrioridade() {
+        return prioridade;
+    }
+
+    public void setPrioridade(int prioridade) {
+        this.prioridade = prioridade;
+    }
+
+    public Date getDataConvertida() {
+        return java.util.Date.from(this.getDataHoraAtendimento().atZone(ZoneId.systemDefault()).toInstant());
+    }
+
+    public Atendimento() {
     }
 
     public int getIdAtendimento() {
@@ -29,6 +45,7 @@ public class Atendimento {
 
     public void setDataHoraAtendimento(LocalDateTime dataHoraAtendimento) {
         this.dataHoraAtendimento = dataHoraAtendimento;
+
     }
 
     public String getDescricaoAtendimento() {
@@ -78,6 +95,5 @@ public class Atendimento {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-    
-    
+
 }

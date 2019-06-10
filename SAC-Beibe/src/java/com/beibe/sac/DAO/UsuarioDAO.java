@@ -18,7 +18,8 @@ import java.util.logging.Logger;
  * @author lemospadilha
  */
 public class UsuarioDAO {
-   List<Usuario> listaUsuarios = new ArrayList<Usuario>();
+
+    List<Usuario> listaUsuarios = new ArrayList<Usuario>();
     Connection conn = null;
 
     public List<Usuario> all() throws SQLException {
@@ -40,12 +41,12 @@ public class UsuarioDAO {
                 user.setBairro(rs.getString("complemento"));
                 user.setCep(rs.getString("cep"));
                 int idCidade = rs.getInt("id_cidade");
-                
+
                 Cidade cidade = CidadeFacade.buscarCidadeCliente(idCidade);
-                if(cidade != null){
-                   user.setCidade(cidade);
+                if (cidade != null) {
+                    user.setCidade(cidade);
                 }
-                
+
                 listaUsuarios.add(user);
             }
         } catch (Exception e) {
@@ -92,7 +93,7 @@ public class UsuarioDAO {
         }
 
     }
-    
+
     public Usuario findById(int idUser) throws SQLException {
         Usuario user = new Usuario();
         try {
@@ -116,8 +117,8 @@ public class UsuarioDAO {
                 user.setTipoUsuario(rs.getString("tipo_usuario"));
                 int idCidade = rs.getInt("id_cidade");
                 Cidade cidade = CidadeFacade.buscarCidadeCliente(idCidade);
-                if(cidade != null){
-                   user.setCidade(cidade);
+                if (cidade != null) {
+                    user.setCidade(cidade);
                 }
             } else {
                 user = null;
@@ -140,18 +141,18 @@ public class UsuarioDAO {
             conn = ConnectionFactory.getConnection();
             PreparedStatement statement = ConnectionFactory.getPreparedStatement(conn,
                     "INSERT INTO tb_usuario (nome, cpf ,email , senha, telefone, nome_rua, numero_rua, complemento, bairro, cep, tipo_usuario, id_cidade)"
-                            + " values (?,?,?,?,?,?,?,?,?,?,?,?) ");
+                    + " values (?,?,?,?,?,?,?,?,?,?,?,?) ");
             statement.setString(1, user.getNomeUsuario());
             statement.setString(2, user.getCpf().replaceAll("\\D", ""));
             statement.setString(3, user.getEmail());
             statement.setString(4, user.getPassword());
             statement.setString(5, user.getTelefone());
             statement.setString(6, user.getNomeRua());
-            statement.setInt(7,user.getNumeroRua());
-            statement.setString(8,user.getComplemento());
-            statement.setString(9,user.getBairro());
-            statement.setString(10,user.getCep());
-            statement.setString(11,tipoUsuario);
+            statement.setInt(7, user.getNumeroRua());
+            statement.setString(8, user.getComplemento());
+            statement.setString(9, user.getBairro());
+            statement.setString(10, user.getCep());
+            statement.setString(11, tipoUsuario);
             statement.setInt(12, user.getCidade().getIdCidade());
             statement.execute();
         } catch (Exception e) {
@@ -165,8 +166,8 @@ public class UsuarioDAO {
     }
 
     public Usuario findById(int id, String tipoUsuario) throws SQLException {
-         conn = null;
-         Usuario user = new Usuario();
+        conn = null;
+        Usuario user = new Usuario();
         try {
             conn = ConnectionFactory.getConnection();
             PreparedStatement statement = ConnectionFactory.getPreparedStatement(conn,
@@ -189,13 +190,13 @@ public class UsuarioDAO {
                 user.setTipoUsuario(rs.getString("tipo_usuario"));
                 int idCidade = rs.getInt("id_cidade");
                 Cidade cidade = CidadeFacade.buscarCidadeCliente(idCidade);
-                if(cidade != null){
-                   user.setCidade(cidade);
+                if (cidade != null) {
+                    user.setCidade(cidade);
                 }
-                
+
             } else {
                 //ClienteNaoExisteException ex = new ClienteNaoExisteException(id);
-                
+
             }
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
@@ -204,13 +205,13 @@ public class UsuarioDAO {
             if (conn != null) {
                 conn.close();
             }
-            
+
             return user;
         }
     }
 
     public int alterar(Usuario user, String tipoUsuario) {
-       try {
+        try {
             conn = ConnectionFactory.getConnection();
             PreparedStatement statement = ConnectionFactory.getPreparedStatement(conn,
                     "UPDATE tb_usuario SET nome=? , cpf =? , email=? , senha=?, telefone =?, nome_rua=?, numero_rua=?, complemento=?, bairro=?, cep=?, tipo_usuario=?,id_cidade=? WHERE id_usuario=?");
@@ -228,20 +229,20 @@ public class UsuarioDAO {
             statement.setInt(12, user.getCidade().getIdCidade());
             statement.setInt(13, user.getIdUsuario());
             statement.executeUpdate();
-            System.out.println(tipoUsuario + " " + user.getNomeUsuario()+ "alterado com sucesso");
+            System.out.println(tipoUsuario + " " + user.getNomeUsuario() + "alterado com sucesso");
             return 0;
-            
-        } catch(Exception e){
+
+        } catch (Exception e) {
             e.printStackTrace();
             return 1;
             //throw new RuntimeException("Erro ao atualizar cliente." + e.getMessage());
-           
-        }finally {
+
+        } finally {
             if (conn != null) {
                 try {
                     conn.close();
                 } catch (SQLException ex) {
-                   throw new RuntimeException("Erro ao fechar conexão.");
+                    throw new RuntimeException("Erro ao fechar conexão.");
                 }
             }
 
@@ -267,10 +268,9 @@ public class UsuarioDAO {
                    throw new RuntimeException("Erro ao fechar conexão.");
                 }
             }
-
         }
     }
-
+  
     public List<Usuario> allFuncionarios() {
         try {
             listaUsuarios = new ArrayList<Usuario>();
@@ -291,10 +291,10 @@ public class UsuarioDAO {
                 user.setTipoUsuario(rs.getString("tipo_usuario"));
                 int idCidade = rs.getInt("id_cidade");
                 Cidade cidade = CidadeFacade.buscarCidadeCliente(idCidade);
-                if(cidade != null){
-                   user.setCidade(cidade);
+                if (cidade != null) {
+                    user.setCidade(cidade);
                 }
-                
+
                 listaUsuarios.add(user);
             }
         } catch (Exception e) {
