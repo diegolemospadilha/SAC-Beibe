@@ -56,7 +56,7 @@
                     <td><c:out value="${atendimento.usuario.nomeUsuario}"/></td>
                 </tr>
                 <tr>
-                    <td><c:out value="Nome do cliente"/></td>
+                    <td><c:out value="Solução Apresentada p/ atendimento"/></td>
                     <td><c:out value="${atendimento.solucaoApresentada}"/></td>
                 </tr>
 

@@ -8,7 +8,7 @@
     <body class="bg-white">
         <jsp:include page="../templates/nav.jsp"/>
 
-        <section class="site-hero site-hero-innerpage overlay" data-stellar-background-ratio="0.5" style="background-image: url(../images/big_image_1.jpg);">
+        <section class="site-hero site-hero-innerpage overlay" data-stellar-background-ratio="0.5" style="background-image: url(http://localhost:8081/SAC-Beibe/images/big_image_1.jpg);">
             <div class="container">
                 <div class="row align-items-center site-hero-inner justify-content-center">
                     <div class="col-md-8 text-center">
@@ -25,7 +25,7 @@
                 <div class="row justify-content-center">
                     <div class="col-md-5 box">
                         <h2 class="mb-5 text-center">Acesse nosso sistema com sua conta</h2>
-                        <form action="  LoginServlet" method="POST">
+                        <form action="../LoginServlet" method="POST">
                             <div class="row">
                                 <div class="col-md-12 form-group">
                                     <i class="fas fa-user p-2"></i><label for="login">Username</label>

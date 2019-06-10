@@ -29,14 +29,11 @@ public class ProdutoDAO {
                 Produto produto = new Produto();
                 produto.setIdProduto(rs.getInt("id_produto"));
                 produto.setNomeProduto(rs.getString("nome_produto"));
-
                 produto.setPesoProduto(rs.getInt("peso_produto"));
                 Categoria c = CategoriaFacade.buscarPorId(rs.getInt("id_categoria"));
                 produto.setCategoria(c);
-
                 listaProdutos.add(produto);
             }
-
         } catch (Exception e) {
             System.out.println("Erro: " + e.getMessage());
 
@@ -44,32 +41,28 @@ public class ProdutoDAO {
             if (conn != null) {
                 conn.close();
             }
-
         }
         return listaProdutos;
-
     }
 
-    public Produto findProdutoById(int idProduto) throws SQLException {
+    public Produto findById(int idProduto) throws SQLException {
         conn = null;
         Produto produto = new Produto();
 
         try {
             conn = ConnectionFactory.getConnection();
             PreparedStatement statement = ConnectionFactory.getPreparedStatement(conn,
-                    "SELECT * FROM tb_produto WHERE id_produto = ?");
+                    "SELECT * FROM tb_produto WHERE id_produto=?");
             statement.setInt(1, idProduto);
             statement.execute();
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 produto.setIdProduto(rs.getInt("id_produto"));
                 produto.setNomeProduto(rs.getString("nome_produto"));
-
                 produto.setPesoProduto(rs.getDouble("peso_produto"));
                 int id = rs.getInt("id_categoria");
                 Categoria cat = CategoriaFacade.buscarPorId(id);
                 produto.setCategoria(cat);
-
             } else {
                 produto = null;
             }

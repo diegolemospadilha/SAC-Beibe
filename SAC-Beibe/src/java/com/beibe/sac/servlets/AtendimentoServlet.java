@@ -61,16 +61,14 @@ public class AtendimentoServlet extends HttpServlet {
                 switch (action) {
                     case "create":
                         List<TipoAtendimento> listaTiposAtendimentos = TipoAtendimentoFacade.buscarTodosTiposAtendimentos();
-                        List<Produto> listaProdutos = ProdutoFacade.buscarTodos();
-                        //List<Usuario> listaClientes = UsuarioFacade.buscarTodos();
+                        List<Produto> listaProdutos = ProdutoFacade.buscarTodos();                  
                         Usuario user = LoginFacade.buscarUsuarioPorId(loginBean.getId());
                         request.setAttribute("listaTiposAtendimentos", listaTiposAtendimentos);
-                        request.setAttribute("listaProdutos", listaProdutos);
-                        //  request.setAttribute("listaClientes", listaClientes);
+                        request.setAttribute("listaProdutos", listaProdutos);                        
                         request.setAttribute("user", user);
                         rd = getServletContext().getRequestDispatcher("/atendimento/atendimento.jsp");
                         rd.forward(request, response);
-                        break;
+                    break;
                     case "new":
                         atendimento = new Atendimento();
                         int idTipoAtendimento = Integer.parseInt(request.getParameter("tipoAtendimento"));
@@ -98,17 +96,15 @@ public class AtendimentoServlet extends HttpServlet {
                         }
                         break;
                     case "list":
-
                         listaAtendimentos = AtendimentoFacade.buscarTodosAtendimentosUser(loginBean.getId());
                         if (listaAtendimentos != null) {
                             request.setAttribute("meusAtendimentos", listaAtendimentos);
-                            rd = getServletContext().getRequestDispatcher("/cliente/meusAtendimento.jsp");
+                            rd = getServletContext().getRequestDispatcher("/cliente/meusAtendimentos.jsp");
                             rd.forward(request, response);
                         } else {
                             response.sendRedirect("/atendimento/atendimento.jsp");
                         }
-
-                        break;
+                    break;
                     case "show":
                         strId = request.getParameter("id");
                         id = Integer.parseInt(strId);
@@ -118,26 +114,22 @@ public class AtendimentoServlet extends HttpServlet {
                             rd = getServletContext().getRequestDispatcher("/atendimento/atendimentoDetalhe.jsp");
                             rd.forward(request, response);
                         }
-
-                        break;
+                    break;
                     case "remove":
                         strId = request.getParameter("id");
                         id = Integer.parseInt(strId);
                         AtendimentoFacade.removerAtendimento(id);
                         rd = getServletContext().getRequestDispatcher("/AtendimentoServlet?action=list");
                         rd.forward(request, response);
-
-                        break;
-                    case "listAberto":
-
+                    break;
+                    case "listarAbertos":
                         listaAtendimentos = AtendimentoFacade.buscarTodosAtendimentosAbertos();
                         if (listaAtendimentos != null) {
                             request.setAttribute("atendimentosEmAberto", listaAtendimentos);
                             rd = getServletContext().getRequestDispatcher("/funcionario/funcionarioAtendimento.jsp");
                             rd.forward(request, response);
                         }
-
-                        break;
+                    break;
                     case "showFunc":
                         strId = request.getParameter("id");
                         id = Integer.parseInt(strId);
@@ -147,27 +139,22 @@ public class AtendimentoServlet extends HttpServlet {
                             rd = getServletContext().getRequestDispatcher("/funcionario/responderAtendimento.jsp");
                             rd.forward(request, response);
                         }
-
-                        break;
+                    break;
                     case "resp":
                         strId = request.getParameter("id");
                         id = Integer.parseInt(strId);
                         String s = request.getParameter("solucao");
-
                         AtendimentoFacade.responderAtendimento(id, s);
-                        response.sendRedirect("/SAC-Beibe/AtendimentoServlet?action=listAberto");
-
-                        break;
-                    case "listTodosAtendimentos":
-
-                        listaAtendimentos = AtendimentoFacade.buscarTodosAtendimentos();
-                        if (listaAtendimentos != null) {
-                            request.setAttribute("todosAtendendimentos", listaAtendimentos);
-                            rd = getServletContext().getRequestDispatcher("/atendimento/listaTodosAtendimentos.jsp");
-                            rd.forward(request, response);
-                        }
-
-                        break;
+                        response.sendRedirect("/SAC-Beibe/AtendimentoServlet?action=listarAbertos");
+                    break;
+                    case "listarTodosAtendimentos":
+                       listaAtendimentos = AtendimentoFacade.buscarTodosAtendimentos();
+                       if (listaAtendimentos != null) {
+                         request.setAttribute("todosAtendimentos", listaAtendimentos);
+                         rd = getServletContext().getRequestDispatcher("/atendimento/listarTodosAtendimentos.jsp");
+                         rd.forward(request, response);
+                       }
+                    break;
                 }
             }
         }

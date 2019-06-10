@@ -15,7 +15,7 @@ public class ProdutoFacade {
     }
 
     public static Produto buscarPorId(int idProduto) throws SQLException {
-        Produto produto = produtoDao.findProdutoById(idProduto);
+        Produto produto = produtoDao.findById(idProduto);
         return produto;
     }
 

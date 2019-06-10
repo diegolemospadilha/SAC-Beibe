@@ -24,8 +24,6 @@
         </div>
         
         <div class="row">
-            
-        
         <div class="col-sm-6">
              <div class='text-center'> 
                 <h4>Produtos cadastradas no sistema</h4>
@@ -56,7 +54,7 @@
                                         <td><c:out value="${p.categoria.nomeCategoria}"/></td>
                                         <td>
                                             <a class="button" href="ProdutoServlet?action=formUpdate&id=${p.idProduto}" class="mr-3"><button><i class="far fa-edit fa-2x"></button></i></a>
-                                            <a href="#" data-toggle="modal" data-target="#myModal" ><button id="idProduto" value="${p.idProduto}"  ><i class="far fa-trash-alt fa-2x"></i></button></a> 
+                                            <a href="#" data-toggle="modal" data-target="#myModal" ><button id="idProduto" value="${p.idProduto}"><i class="far fa-trash-alt fa-2x"></i></button></a> 
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -98,12 +96,11 @@
         
         <c:if test="${!empty msg}">
             <div style="margin-left: 37%" class=" w-25 d-flex justify-content-center alert alert-success alert-dismissible fade show" role="alert">
-            <strong><c:out value="${msg}"/> </strong>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-            
+                <strong><c:out value="${msg}"/> </strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>      
         </c:if>
         
         <jsp:include page="../templates/modalRemove.jsp"/>

@@ -12,13 +12,13 @@ public class AtendimentoFacade {
     public static final AtendimentoDAO atendimentoDAO = new AtendimentoDAO();
 
     public static List<Atendimento> buscarTodosAtendimentos() throws SQLException {
-        List<Atendimento> listaAtendimento = atendimentoDAO.all();
-        return listaAtendimento;
+        List<Atendimento> listaAtendimentos = atendimentoDAO.all();
+        return listaAtendimentos;
     }
 
     public static List<Atendimento> buscarTodosAtendimentosAbertos() throws SQLException {
-        List<Atendimento> listaAtendimento = atendimentoDAO.Abertos();
-        return listaAtendimento;
+        List<Atendimento> listaAtendimentos = atendimentoDAO.buscarAtendimentosAbertos();
+        return listaAtendimentos;
     }
 
     public static Atendimento buscarAtendimentoPorId(int id) throws SQLException {
@@ -41,12 +41,11 @@ public class AtendimentoFacade {
     }
 
     public static List<Atendimento> buscarTodosAtendimentosUser(int id) throws SQLException {
-        List<Atendimento> listaAtendimento = atendimentoDAO.allByUser(id);
-        return listaAtendimento;
+        List<Atendimento> listaAtendimentos = atendimentoDAO.allByUser(id);
+        return listaAtendimentos;
     }
 
     public static void responderAtendimento(int id, String solucao) throws SQLException {
         atendimentoDAO.responder(id, solucao);
     }
-
 }
