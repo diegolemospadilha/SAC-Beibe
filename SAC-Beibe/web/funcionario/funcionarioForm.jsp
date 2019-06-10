@@ -87,8 +87,8 @@
                             
                             <i class="fas fa-city p-2"></i> <label for="cargo"> Cargo : </label>
                             <select class="form-control mb-3" type="text" id="cargo" name="cargo">
-                                <option value="F">Funcionário</option>
-                                <option value="G">Gerente</option>
+                                <option value="Funcionario">Funcionário</option>
+                                <option value="Gerente">Gerente</option>
                             </select>
                             <input type="text" name="id" value="${funcionario.idUsuario}" hidden>
 

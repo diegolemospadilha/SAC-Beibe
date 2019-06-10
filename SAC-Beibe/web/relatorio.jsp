@@ -25,23 +25,23 @@
                     <a href="GeradorRelatorioServlet?action=listarPorPeriodo" class="m-5 btn btn-link">Listar atendimentos em aberto por período</a>
                 </li>
                 <li class="list-group-item">
-                    <a href="GeradorRelatorioServlet?action=listarAtendimentosResolvidos" class="m-5 btn btn-link">Produtos mais reclamados</a>
+                    <a href="GeradorRelatorioServlet?action=produtosMaisReclamados" class="m-5 btn btn-link">Produtos mais reclamados</a>
                 </li>
                 <li class="list-group-item">
-                    <a href="GeradorRelatorioServlet?action=tipoAtendimento" class="m-5 btn btn-link">Relatório de reclamações</a>
+                    <a href="GeradorRelatorioServlet?action=reclamacoes" class="m-5 btn btn-link">Relatório de reclamações</a>
                 </li>
             </ul>
         </div></br>
 
-        <c:if test="${showDiv== 'tipoAtendimento'}">
+        <c:if test="${showDiv== 'reclamacoes'}">
             <div style="padding-left: 25%" class="mt-3 w-75 d-flex justify-content-center">
-                <form action="GeradorRelatorioServlet?action=gerarPdfTipoAtendimento" method="POST">
-                    <i class="fas fa-user p-2"></i><label for="tipoAtendimento"> Selecione o tipo de atendimento:</label>
-                    <select id="tipoAtendimento" name="tipoAtendimento" class="form-control">
-                        <option selected="selected">Selecione o tipo de Atendimento</option>
-                        <c:forEach var="tipoAtendimento" items="${listaTiposAtendimentos}">
-                            <option value="${tipoAtendimento.idTipoAtendimento }">${tipoAtendimento.nomeTipoAtendimento}</option>
-                        </c:forEach>
+                <form action="GeradorRelatorioServlet?action=gerarPdfReclamacoes" method="POST">
+                    <i class="fas fa-user p-2"></i><label for="reclamacoes"> Selecione a status de atendimento para as reclamações:</label>
+                    <select id="reclamacoes" name="reclamacoes" class="form-control">
+                        <option selected="selected">Selecione a situação do atendimento</option>
+                        <option value="todas">Todas as reclamações</option>
+                        <option value="N">Reclamações em aberto</option>
+                        <option value="S">Reclamações em finalizadas</option>
                     </select></br>
 
                     <div style="padding-left: 25%">

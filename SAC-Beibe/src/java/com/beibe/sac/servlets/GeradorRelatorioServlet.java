@@ -9,6 +9,8 @@ import java.net.MalformedURLException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -67,20 +69,24 @@ public class GeradorRelatorioServlet extends HttpServlet {
                         GeradorRelatorioFacade.gerarRelatorio(request, response, "/relatorios/relatorioFuncionarios.jasper");
                     break;
                         
-                    case "listarAtendimentosResolvidos":
-                        GeradorRelatorioFacade.gerarRelatorio(request, response, "/relatorios/relatorioAtendimentosResolvidos.jasper");
+                    case "produtosMaisReclamados":
+                        GeradorRelatorioFacade.gerarRelatorio(request, response, "/relatorios/relatorioProdutosMaisReclamados.jasper");
                     break;
                     
-                    case "tipoAtendimento":
-                        List<TipoAtendimento> listaTiposAtendimentos = TipoAtendimentoFacade.buscarTodosTiposAtendimentos();
-                        request.setAttribute("listaTiposAtendimentos", listaTiposAtendimentos);
-                        request.setAttribute("showDiv", "tipoAtendimento");
+                    case "reclamacoes":
+                        request.setAttribute("showDiv", "reclamacoes");
                         rd = getServletContext().getRequestDispatcher("/relatorio.jsp");
                         rd.forward(request, response);
                     break;
-                    case "gerarPdfTipoAtendimento": 
-                        int idTipoAtendimento = Integer.parseInt(request.getParameter("tipoAtendimento"));
-                        GeradorRelatorioFacade.gerarRelatorio(request, response, "/relatorios/relatorioTipoAtendimento.jasper", idTipoAtendimento);
+                    case "gerarPdfReclamacoes": 
+                        String  situacao = request.getParameter("reclamacoes");
+                        List<String> params = new ArrayList<String>();
+                        if(situacao.equals("todas")){
+                            params.addAll(Arrays.asList("S","N"));
+                        }else{
+                            params.add(situacao);
+                        }
+                        GeradorRelatorioFacade.gerarRelatorio(request, response, "/relatorios/relatorioTodasReclamacoes.jasper", params);
                     break;
                     case "listarPorPeriodo": 
                         request.setAttribute("showDiv", "periodo");
@@ -90,7 +96,6 @@ public class GeradorRelatorioServlet extends HttpServlet {
                     case "gerarRelatorioPorData": 
                          String dt1 = request.getParameter("dataInicio");
                          Date dataInicio = GeradorRelatorioFacade.converterData(dt1);
-                         
                          String dt2 = request.getParameter("dataFim");
                          Date dataFim = GeradorRelatorioFacade.converterData(dt2);
                          GeradorRelatorioFacade.gerarRelatorio(request, response, "/relatorios/relatorioPorPeriodo.jasper", dataInicio, dataFim);   

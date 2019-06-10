@@ -5,19 +5,14 @@
 <!-- END header -->
 <html>
     <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
         <jsp:include page="../templates/head.jsp"/>
     </head>
     <body>
         <jsp:include page="../templates/nav.jsp"/>
-
-
         <section class="site-hero site-hero-innerpage overlay" data-stellar-background-ratio="0.5" style="background-image: url(http://localhost:8081/SAC-Beibe/images/big_image_1.jpg);">
             <div class="container">
                 <div class="row align-items-center site-hero-inner justify-content-center">
                     <div class="col-md-8 text-center">
-
                         <div class="mb-5 element-animate">
                             <h1>Lista de Funcionários Beibe</h1>
                         </div>
@@ -25,19 +20,17 @@
                 </div>
             </div>
         </section>
+        
         <section class="site-section bg-light">
-
             <div class='d-flex justify-content-center m-5'>
-
                 <c:choose>
                     <c:when test="${empty listaFuncionarios}" >
                         <div class="text-center">
                             <p class="m-5">O sistema não possui funcionarios cadastrados no momento. Se desejar cadastre um novo funcionario agora mesmo!</p>  
                         </div>    
                     </c:when>
-                    <c:otherwise>
-                       
-                            <table class='table w-75 text-center'>    
+                    <c:otherwise>                  
+                          <table class='table w-75 text-center'>    
                                 <tr>
                                     <th>Id Funcionário</th>
                                     <th>Nome do funcionário</th>

@@ -49,13 +49,18 @@ public class UsuarioFacade {
             return 1;
         }
     }
-
-    public static List<Usuario> buscarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public static void remover(int id) {
+       usuarioDAO.remove(id);
     }
 
     public static List<Usuario> buscarTodosFuncionarios() {
         List<Usuario> funcionarios = usuarioDAO.allFuncionarios();
         return funcionarios;
     }
+
+    public static List<Usuario> buscarTodos() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    
 }

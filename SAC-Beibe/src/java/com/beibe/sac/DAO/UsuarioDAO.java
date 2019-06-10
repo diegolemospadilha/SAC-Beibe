@@ -221,11 +221,11 @@ public class UsuarioDAO {
             statement.setString(4, user.getPassword());
             statement.setString(5, user.getTelefone());
             statement.setString(6, user.getNomeRua());
-            statement.setInt(7, user.getNumeroRua());
-            statement.setString(8, user.getComplemento());
-            statement.setString(9, user.getBairro());
-            statement.setString(10, user.getCep());
-            statement.setString(11, "C");
+            statement.setInt(7,user.getNumeroRua());
+            statement.setString(8,user.getComplemento());
+            statement.setString(9,user.getBairro());
+            statement.setString(10,user.getCep().replaceAll("\\D", ""));
+            statement.setString(11,tipoUsuario);
             statement.setInt(12, user.getCidade().getIdCidade());
             statement.setInt(13, user.getIdUsuario());
             statement.executeUpdate();
@@ -248,12 +248,34 @@ public class UsuarioDAO {
 
         }
     }
-
+    
+    public void remove(int id) {
+        try {
+            conn = ConnectionFactory.getConnection();
+            PreparedStatement statement = ConnectionFactory.getPreparedStatement(conn,
+                    "DELETE FROM tb_usuario WHERE id_usuario=?");
+            statement.setInt(1, id);
+            statement.execute();
+        } catch(Exception e){
+            e.printStackTrace();
+             throw new RuntimeException("Erro ao deletar usuário.");
+            
+        }finally {
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                   throw new RuntimeException("Erro ao fechar conexão.");
+                }
+            }
+        }
+    }
+  
     public List<Usuario> allFuncionarios() {
         try {
             listaUsuarios = new ArrayList<Usuario>();
             conn = ConnectionFactory.getConnection();
-            ResultSet rs = ConnectionFactory.getResultSet(conn, "SELECT * FROM tb_usuario WHERE tipo_usuario='F' OR tipo_usuario='G'");
+            ResultSet rs = ConnectionFactory.getResultSet(conn, "SELECT * FROM tb_usuario WHERE tipo_usuario='Funcionario' OR tipo_usuario='Gerente'");
             while (rs.next()) {
                 Usuario user = new Usuario();
                 user.setIdUsuario(rs.getInt("id_usuario"));
