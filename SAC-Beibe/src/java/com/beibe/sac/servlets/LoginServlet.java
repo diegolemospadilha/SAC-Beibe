@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.beibe.sac.servlets;
 
 import com.beibe.sac.beans.LoginBean;
@@ -45,7 +40,6 @@ public class LoginServlet extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             String usuario = request.getParameter("login");
             String senha = request.getParameter("passwd");
-
             Usuario user = LoginFacade.buscarUsuario(usuario, senha);
 
             HttpSession session = request.getSession();

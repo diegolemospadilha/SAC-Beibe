@@ -23,9 +23,7 @@ public class UsuarioDAO {
     Connection conn = null;
 
     public List<Usuario> all() throws SQLException {
-
         try {
-
             conn = ConnectionFactory.getConnection();
             ResultSet rs = ConnectionFactory.getResultSet(conn, "SELECT * FROM tb_usuario");
             while (rs.next()) {
@@ -38,7 +36,7 @@ public class UsuarioDAO {
                 user.setNomeRua(rs.getString("nome_rua"));
                 user.setNumeroRua(rs.getInt("numero_rua"));
                 user.setComplemento(rs.getString("complemento"));
-                user.setBairro(rs.getString("complemento"));
+                user.setBairro(rs.getString("bairro"));
                 user.setCep(rs.getString("cep"));
                 int idCidade = rs.getInt("id_cidade");
 
@@ -46,7 +44,6 @@ public class UsuarioDAO {
                 if (cidade != null) {
                     user.setCidade(cidade);
                 }
-
                 listaUsuarios.add(user);
             }
         } catch (Exception e) {
@@ -56,7 +53,6 @@ public class UsuarioDAO {
             if (conn != null) {
                 conn.close();
             }
-
         }
         return listaUsuarios;
     }
@@ -88,10 +84,8 @@ public class UsuarioDAO {
             if (conn != null) {
                 conn.close();
             }
-
             return user;
         }
-
     }
 
     public Usuario findById(int idUser) throws SQLException {
@@ -132,7 +126,6 @@ public class UsuarioDAO {
             }
             return user;
         }
-
     }
 
     public void insert(Usuario user, String tipoUsuario) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
@@ -161,7 +154,6 @@ public class UsuarioDAO {
             if (conn != null) {
                 conn.close();
             }
-
         }
     }
 
@@ -193,7 +185,6 @@ public class UsuarioDAO {
                 if (cidade != null) {
                     user.setCidade(cidade);
                 }
-
             } else {
                 //ClienteNaoExisteException ex = new ClienteNaoExisteException(id);
 
@@ -205,7 +196,6 @@ public class UsuarioDAO {
             if (conn != null) {
                 conn.close();
             }
-
             return user;
         }
     }
@@ -231,12 +221,10 @@ public class UsuarioDAO {
             statement.executeUpdate();
             System.out.println(tipoUsuario + " " + user.getNomeUsuario() + "alterado com sucesso");
             return 0;
-
         } catch (Exception e) {
             e.printStackTrace();
             return 1;
             //throw new RuntimeException("Erro ao atualizar cliente." + e.getMessage());
-
         } finally {
             if (conn != null) {
                 try {
@@ -245,7 +233,6 @@ public class UsuarioDAO {
                     throw new RuntimeException("Erro ao fechar conexão.");
                 }
             }
-
         }
     }
     
@@ -308,7 +295,6 @@ public class UsuarioDAO {
                     Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-
         }
         return listaUsuarios;
     }

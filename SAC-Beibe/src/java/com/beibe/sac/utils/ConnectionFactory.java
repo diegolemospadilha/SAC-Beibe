@@ -16,7 +16,7 @@ public class ConnectionFactory {
     public static Connection getConnection() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
         Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
         String str = "jdbc:mysql://localhost/beibe?autoReconnect=true&useSSL=false";
-        Connection connection = DriverManager.getConnection(str, "dev", "colodedeus");
+        Connection connection = DriverManager.getConnection(str, "root", "");
         return connection;
     }
 
