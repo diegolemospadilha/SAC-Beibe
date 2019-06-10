@@ -10,6 +10,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -65,7 +66,7 @@ public class GeradorRelatorioFacade {
 
     }
 
-    public static void gerarRelatorio(HttpServletRequest request, HttpServletResponse response, String arquivoJasper, int idTipoAtendimento) throws InstantiationException, IllegalAccessException, MalformedURLException, IOException, ServletException {
+    public static void gerarRelatorio(HttpServletRequest request, HttpServletResponse response, String arquivoJasper, List<String> listaParams) throws InstantiationException, IllegalAccessException, MalformedURLException, IOException, ServletException {
        try {
             conn = ConnectionFactory.getConnection();
             ServletOutputStream sout;
@@ -77,7 +78,7 @@ public class GeradorRelatorioFacade {
             URL jasperURL = new URL(host + jasper);
             // Parâmetros do relatório
             HashMap params = new HashMap();
-            params.put("tipoAtendimento", idTipoAtendimento);
+            params.put("listaParams", listaParams);
             // Geração do relatório
             byte[] bytes = JasperRunManager.runReportToPdf(
                     jasperURL.openStream(), params, conn);
@@ -122,8 +123,8 @@ public class GeradorRelatorioFacade {
             URL jasperURL = new URL(host + jasper);
             // Parâmetros do relatório
             HashMap params = new HashMap();
-            params.put("dataInicio", dataInicio);
-            params.put("dataFim", dataFim);
+            params.put("dataBegin", dataInicio);
+            params.put("dataEnd", dataFim);
             // Geração do relatório
             byte[] bytes = JasperRunManager.runReportToPdf(jasperURL.openStream(), params, conn);
 

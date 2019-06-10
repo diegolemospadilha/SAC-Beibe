@@ -105,7 +105,7 @@ public class FuncionarioServlet extends HttpServlet {
                     case "remove":
                         strId = request.getParameter("id");
                         id = Integer.parseInt(strId);
-                        //UsuarioFacade.remover(id);
+                        UsuarioFacade.remover(id);
                         rd = getServletContext().getRequestDispatcher("/ClienteServlet?action=list");
                         rd.forward(request, response);
                         break;
