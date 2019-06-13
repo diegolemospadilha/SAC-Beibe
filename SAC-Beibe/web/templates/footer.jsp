@@ -16,7 +16,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 
 <div class="container-fluid ">
-    <footer>
+    <footer class="site-footer" style=" background-image: url(http://www4.uma.pt/cierl/wp-content/uploads/2015/02/rodape.png);"> 
         <div class="d-flex justify-content-center">
             <p class="mt-4 text-black">Em caso de problemas contactar o administrador:
                 <c:out value="${configuracao.email}"/>

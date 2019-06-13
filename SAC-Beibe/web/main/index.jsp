@@ -23,47 +23,40 @@
             </div>
         </section>
 
-        <section class="school-features d-flex" style="padding-left: 7em;background-image: url(images/big_image_3.jpg);">
+        <section class="school-features d-flex justify-content-center">
 
             <div class="inner" align="center">
                 <div class="media d-block feature">
                     <div class="icon"><span class="flaticon-video-call"></span></div>
                     <div class="media-body">
-                        <h3 class="mt-0">Estética Facial</h3>
+                        <h3 class="mt-0 text-black">Estética Facial</h3>
                         <img src="http://fabianascaranzi.com.br/wp-content/uploads/2016/05/16374967.jpg"  class="img-responsive" alt="Cinque Terre" style="width:15em ;height: 220px">
-
                     </div>
                 </div>
 
                 <div class="media d-block feature">
                     <div class="icon"><span class="flaticon-video-call"></span></div>
                     <div class="media-body">
-                        <h3 class="mt-0">Estética corporal</h3>
+                        <h3 class="mt-0 text-black">Estética corporal</h3>
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTq48mSg3Y8-w0FQbJ1zLNdLrIU6suBfC6MJ_USuA9rQj2NlkpqsA"  class="img-responsive" alt="Cinque Terre" style="width:15em;height: 220px">
-
                     </div>
-
                 </div>
 
                 <div class="media d-block feature">
                     <div class="icon"><span class="flaticon-video-call"></span></div>
                     <div class="media-body">
-                        <h3 class="mt-0">Estética dos olhos</h3>
+                        <h3 class="mt-0 text-black">Estética dos olhos</h3>
                         <img src="http://art180.com.br/upload_clientes/81030/userfiles/images/olhar1.jpg"  class="img-responsive" alt="Cinque Terre" style="width:15em ; height: 220px">
 
                     </div>
-
                 </div>
-
 
                 <div class="media d-block feature">
                     <div class="icon"><span class="flaticon-video-call"></span></div>
                     <div class="media-body">
-                        <h3 class="mt-0">Bem estar</h3>
+                        <h3 class="mt-0 text-black">Bem estar</h3>
                         <img src="https://pbs.twimg.com/profile_images/2365394012/estetica_400x400.jpg "  class="img-responsive" alt="Cinque Terre" style="width:15em ;height: 220px">
-
                     </div>
-
                 </div>
             </div>
         </section>

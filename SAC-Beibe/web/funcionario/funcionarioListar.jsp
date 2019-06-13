@@ -1,4 +1,5 @@
 <%@ page errorPage="erro.jsp" %>
+<%@include file="../templates/validationLoginBean.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -51,7 +52,10 @@
                                         <td style="width: 20%"> 
                                             <a class="button" href="FuncionarioServlet?action=show&id=${funcionario.idUsuario}" class="mr-1"><button><i class="far fa-eye fa-2x"></i></button></a>
                                             <a class="button" href="FuncionarioServlet?action=formUpdate&id=${funcionario.idUsuario}" class="mr-1"><button><i class="far fa-edit fa-2x"></button></i></a>
-                                            <a href="#" data-toggle="modal" data-target="#myModal" ><button id="idUsuario" value="${funcionario.idUsuario}"  ><i class="far fa-trash-alt fa-2x"></i></button></a> 
+                                            <c:if test="${loginBean.id != funcionario.idUsuario}">
+                                               <a href="#" data-toggle="modal" data-target="#myModal" ><button onclick="deleteId(${funcionario.idUsuario})"  ><i class="far fa-trash-alt fa-2x"></i></button></a>  
+                                            </c:if>
+                                            
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -69,21 +73,26 @@
     </body>
 </html>
 <script>
-$("#save").click(function () {
-    var idUsuario = $("#idUsuario").val();
-    var id = "action=remove" + "&id=" + idUsuario;
-    console.log(id);
-    $('#myModal').modal('hide');
-    $.ajax({
-        type: "GET",
-        url: "FuncionarioServlet",
-        data: id,
-        success: function (result) {
-            location.reload();
+function deleteId(numero)
+    {
 
-        },
-        error: function (error) {
-            console.log("error" + error);
-        }
-    });
-});</script>
+        $("#save").click(function() {
+            var idFuncionario = numero;
+
+            var id = "action=remove" + "&id=" + idFuncionario;
+            $('#myModal').modal('hide');
+            $.ajax({
+                type: "GET",
+                url: "ProdutoServlet",
+                data: id,
+                success: function(result) {
+                    location.reload();
+
+                },
+                error: function(error) {
+                    console.log("error" + error);
+                }
+            });
+        });
+    }
+</script>

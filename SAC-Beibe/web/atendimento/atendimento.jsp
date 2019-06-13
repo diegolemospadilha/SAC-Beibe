@@ -1,10 +1,13 @@
 <%@ page errorPage="erro.jsp" %>
+<%@include file="../templates/validationLoginBean.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head><jsp:include page="../templates/head.jsp"/></head>
+    <head>
+        <jsp:include page="../templates/head.jsp"/>
+    </head>
     <body>
 
         <jsp:include page="../templates/nav.jsp" />

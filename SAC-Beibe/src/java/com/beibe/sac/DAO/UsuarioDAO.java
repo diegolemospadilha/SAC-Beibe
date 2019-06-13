@@ -62,7 +62,7 @@ public class UsuarioDAO {
         try {
             conn = ConnectionFactory.getConnection();
             PreparedStatement statement = ConnectionFactory.getPreparedStatement(conn,
-                    "SELECT * FROM tb_usuario WHERE email = ? AND senha=?");
+                    "SELECT * FROM tb_usuario WHERE email=? AND senha=?");
             statement.setString(1, login);
             statement.setString(2, passwd);
             statement.execute();
@@ -139,7 +139,7 @@ public class UsuarioDAO {
             statement.setString(2, user.getCpf().replaceAll("\\D", ""));
             statement.setString(3, user.getEmail());
             statement.setString(4, user.getPassword());
-            statement.setString(5, user.getTelefone());
+            statement.setString(5, user.getTelefone().replaceAll("\\D", ""));
             statement.setString(6, user.getNomeRua());
             statement.setInt(7, user.getNumeroRua());
             statement.setString(8, user.getComplemento());
@@ -209,7 +209,7 @@ public class UsuarioDAO {
             statement.setString(2, user.getCpf().replaceAll("\\D", ""));
             statement.setString(3, user.getEmail());
             statement.setString(4, user.getPassword());
-            statement.setString(5, user.getTelefone());
+            statement.setString(5, user.getTelefone().replaceAll("\\D", ""));
             statement.setString(6, user.getNomeRua());
             statement.setInt(7,user.getNumeroRua());
             statement.setString(8,user.getComplemento());

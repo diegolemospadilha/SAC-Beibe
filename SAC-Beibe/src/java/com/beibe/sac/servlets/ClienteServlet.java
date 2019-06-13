@@ -86,7 +86,7 @@ public class ClienteServlet extends HttpServlet {
                     case "formUpdate":
                         strId = request.getParameter("id");
                         id = Integer.parseInt(strId);
-                        user = UsuarioFacade.buscarPorId(id, "C");
+                        user = UsuarioFacade.buscarPorId(id, "Cliente");
                         if (user != null) {
                             request.setAttribute("cliente", user);
                             estados = EstadoFacade.buscarTodos();

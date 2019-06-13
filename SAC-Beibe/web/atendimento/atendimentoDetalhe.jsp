@@ -1,5 +1,6 @@
 <%@ page errorPage="erro.jsp" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="../templates/validationLoginBean.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
@@ -9,16 +10,10 @@
     <body>
         <jsp:include page="../templates/nav.jsp" />
 
-        <jsp:useBean id="loginBean" class="com.beibe.sac.beans.LoginBean" scope="session"/>
-
-        <div class='container col-md-6'>
-            <div class='align-self-center m-5'>
-                <h2 class='text-center col-12-md' style='color:#000'>Portal Servlet</h2>
+        <div class='d-flex justify-content-center m-5'>
+            <div class='align-self-center'>
+               <h4>Dados do atendimento</h4>
             </div>
-        </div>
-
-        <div class='text-center'>
-            <h4>Dados do atendimento</h4>
         </div>
 
         <div class='container mt-5 d-flex justify-content-center'>
@@ -29,14 +24,13 @@
                 </tr>
                 <tr>
                     <td><c:out value="Data de atendimento :"/></td>
-                    <td>cliente
+                    <td>
                         <fmt:parseDate value="${ atendimento.dataHoraAtendimento }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
                         <fmt:formatDate pattern="dd.MM.yyyy HH:mm" value="${ parsedDateTime }" />
-
                     </td>
                 </tr>
                 <tr>
-                    <td><c:out value="Status Atendimento :"/></td>
+                    <td><c:out value="Atendimento Resolvido:"/></td>
                     <td><c:out value="${atendimento.situacao}"></c:out></td>
                     </tr>
                     <tr>
@@ -65,18 +59,15 @@
         </div>
 
         <div class="d-flex justify-content-center">
-            <a href='AtendimentoServlet?action=list' class='btn btn-primary col-md-1 ml-2' style='float: right; '>Voltar</a>
+            <a href='AtendimentoServlet?action=list' class='btn btn-primary col-1 ml-2' style='float: right; '>Voltar</a>
 
             <c:if test="${atendimento.situacao == 'N'}">
-                <a href="#" data-toggle="modal"data-target="#myModal" >
-                    <button   class='btn btn-danger ml-2 ' id="idAtedimento" value="${atendimento.idAtendimento}"  >
-                        Delete
-                    </button></a>
-                </c:if>
+                <button data-toggle="modal"data-target="#myModal" class='btn btn-danger col-1 ml-2 ' id="idAtendimento" value="${atendimento.idAtendimento}">Delete</button>
+            </c:if>
         </div>
 
         <jsp:include page="../templates/footer.jsp" />
-        <jsp:include page="../cliente/delAtendimento.jsp" />
+        <jsp:include page="../templates/modalRemove.jsp" />
 
     </body>
 </html>
@@ -84,8 +75,8 @@
 <script>
     $("#save").click(function() {
 
-        var idAtedimento = $("#idAtedimento").val();
-        var id = "action=remove" + "&id=" + idAtedimento;
+        var idAtendimento = $("#idAtendimento").val();
+        var id = "action=remove" + "&id=" + idAtendimento;
 
         $('#myModal').modal('hide');
         $.ajax({
