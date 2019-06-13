@@ -10,8 +10,8 @@ public class LoginFacade {
     private static final UsuarioDAO userDAO = new UsuarioDAO();
     
     public static Usuario buscarUsuario(String login, String passwd) throws SQLException, UnsupportedEncodingException, NoSuchAlgorithmException{
-        //String senha = UsuarioFacade.criptografarSenha(passwd);
-        Usuario user = userDAO.findByLogin(login, passwd);
+        String senha = UsuarioFacade.criptografarSenha(passwd);
+        Usuario user = userDAO.findByLogin(login, senha);
         return user;
     }
     

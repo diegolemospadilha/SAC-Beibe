@@ -1,3 +1,4 @@
+<%@include file="../templates/validationLoginBean.jsp"%>
 <%@ page errorPage="erro.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -23,7 +24,7 @@
                     <div class="col-md-8 text-center">
 
                         <div class="mb-5 element-animate">
-                            <h1><c:out value="${(ac == \"update\") ? \"Cadastro\" : \"Atualização de Dados\"}"/></h1>
+                            <h1><c:out value="${(ac == \"update\") ? \"Atualização de Dados\" : \"Cadastro\"}"/></h1>
                         </div>
                     </div>
                 </div>
@@ -54,7 +55,7 @@
                             <input  class="form-control mb-3 email" type="password" name="passwd" required  minlength="8" maxlength="8" value="${funcionario.password}"/>
 
                             <i class="fas fa-road p-2"></i> <label> Telefone: </label>
-                            <input  class="form-control mb-3 telefone" type="text" name="telefone" required value="${funcionario.telefone}" minlength="11" maxlength="11">
+                            <input  class="form-control mb-3 phone_with_ddd" type="text" name="telefone" required value="${funcionario.telefone}" minlength="11" maxlength="11">
 
                             <i class="fas fa-road p-2"></i> <label> Endereço : </label>
                             <input  class="form-control mb-3" type="text" name="endereco" required value="${funcionario.nomeRua}" minlength="5" maxlength="45">
@@ -93,7 +94,7 @@
                             <input type="text" name="id" value="${funcionario.idUsuario}" hidden>
 
                             <div class="d-flex justify-content-center mt-5">
-                                <a href="../ClienteServlet" class="btn btn-danger w-25 mr-3" type="submit">Cancelar</a>
+                                <a href="http://localhost:8081/SAC-Beibe/FuncdionarioServlet?action=list" class="btn btn-danger w-25 mr-3" type="submit">Cancelar</a>
                                 <c:if test="${funcionario.idUsuario==null}">
                                     <c:set var="valueButton" value="Save" />
 

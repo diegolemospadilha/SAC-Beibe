@@ -1,4 +1,5 @@
 <%@ page errorPage="erro.jsp" %>
+<%@include file="../templates/validationLoginBean.jsp"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <!DOCTYPE html>
@@ -54,7 +55,7 @@
                                         <td><c:out value="${p.categoria.nomeCategoria}"/></td>
                                         <td>
                                             <a class="button" href="ProdutoServlet?action=formUpdate&id=${p.idProduto}" class="mr-3"><button><i class="far fa-edit fa-2x"></button></i></a>
-                                            <a href="#" data-toggle="modal" data-target="#myModal" ><button id="idProduto" value="${p.idProduto}"><i class="far fa-trash-alt fa-2x"></i></button></a> 
+                                            <a href="#" data-toggle="modal" data-target="#myModal" ><button onclick="deleteId(${p.idProduto})"><i class="far fa-trash-alt fa-2x"></i></button></a> 
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -109,22 +110,27 @@
     </body>
 </html>
 <script>
-$("#save").click(function () {
-    var idProduto = $("#idProduto").val();
-    var id = "action=remove" + "&id=" + idProduto;
-    console.log(id);
-    $('#myModal').modal('hide');
-    $.ajax({
-        type: "GET",
-        url: "ProdutoServlet",
-        data: id,
-        success: function (result) {
-            location.reload();
+   function deleteId(numero)
+    {
 
-        },
-        error: function (error) {
-            console.log("error" + error);
-        }
-    });
-});</script>
+        $("#save").click(function() {
+            var idProduto = numero;
+
+            var id = "action=remove" + "&id=" + idProduto;
+            $('#myModal').modal('hide');
+            $.ajax({
+                type: "GET",
+                url: "ProdutoServlet",
+                data: id,
+                success: function(result) {
+                    location.reload();
+
+                },
+                error: function(error) {
+                    console.log("error" + error);
+                }
+            });
+        });
+    }
+</script>
 

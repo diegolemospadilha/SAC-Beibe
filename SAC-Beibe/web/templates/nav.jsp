@@ -4,20 +4,20 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="main/index.jsp">Beibe Salão de Beleza</a>
+    <a class="navbar-brand" href="http://localhost:8081/SAC-Beibe/main/index.jsp">Beibe Salão de Beleza</a>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <ul class="navbar-nav">
             <c:choose>
                 <c:when test="${loginBean.tipoUsuario == 'Cliente'}">
                     <div class="navbar-nav">
-                        <a class="nav-item nav-link active" href="../ClienteServlet?action=formUpdate&id=${loginBean.id}"> Alterar Dados <span class="sr-only">(current)</span></a>
+                        <a class="nav-item nav-link active" href="ClienteServlet?action=formUpdate&id=${loginBean.id}"> Alterar Dados <span class="sr-only">(current)</span></a>
                     </div>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Atendimentos
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="AtendimentoServlet?action=create  ">Criar atendimento</a>
+                            <a class="dropdown-item" href="AtendimentoServlet?action=create">Criar atendimento</a>
                             <a class="dropdown-item" href="AtendimentoServlet?action=list">Meus atendimentos</a>
                         </div>
                     </li>
@@ -72,7 +72,7 @@
         </c:if>
         <c:if test="${empty loginBean}">
             <a class="nav-item nav-link active text-white" href="http://localhost:8081/SAC-Beibe/main/login.jsp">Login <span class="sr-only"></span></a>
-            <a class="nav-item nav-link active text-white" href="../ClienteServlet?action=formNew">Cadastre-se agora!<span class="sr-only"></span></a>
+            <a class="nav-item nav-link active text-white" href="http://localhost:8081/SAC-Beibe//ClienteServlet?action=formNew">Cadastre-se agora!<span class="sr-only"></span></a>
         </c:if>
     </div>
 </nav>

@@ -1,4 +1,5 @@
 <%@ page errorPage="erro.jsp" %>
+<%@include file="../templates/validationLoginBean.jsp"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -14,7 +15,6 @@
                 <div class='container col-md-6 text-center'>
                     <div class='align-self-center m-5'>
                         <h4>Atendimentos cadastrados</h4>
-                        <h2 class='text-center' style='color:#000'>Portal Servlet</h2>
                     </div>
                 </div>
 
@@ -22,7 +22,12 @@
                 <div class="col-md-12 col-md-offset-2">
 
                     <div class='d-flex justify-content-center m-5'>
-                        <c:if test="${ meusAtendimentos!=null}">
+                        <c:if test="${empty meusAtendimentos}">
+                            <div class="text-center">
+                                <p class="m-5">Você não possui atendimentos no momento. Se desejar cadastre um novo atendimento agora mesmo!</p>  
+                            </div>  
+                        </c:if>
+                        <c:if test="${!empty meusAtendimentos}">
                             <table class=' table  text-center'>
                                 <tr>
                                     <th>Data/hora</th>
@@ -41,7 +46,6 @@
                                             <a  class="mr-3" href="AtendimentoServlet?action=show&id=${atendimento.idAtendimento}"><button><i class="far fa-eye fa-2x"></i></button></a>
                                         </td>
                                     </tr>
-
                                 </c:forEach>
                             </table>
                         </c:if>

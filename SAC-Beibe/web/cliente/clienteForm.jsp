@@ -23,7 +23,7 @@
                     <div class="col-md-8 text-center">
 
                         <div class="mb-5 element-animate">
-                            <h1><c:out value="${(ac == \"update\") ? \"Cadastro\" : \"Atualização de Dados\"}"/></h1>
+                            <h1><c:out value="${(ac == \"update\") ? \"Atualização de Dados\" : \"Cadastro\"}"/></h1>
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,7 @@
                             <input  class="form-control mb-3 email" type="password" name="passwd" required  minlength="8" maxlength="8" value="${cliente.password}"/>
 
                             <i class="fas fa-road p-2"></i> <label> Telefone: </label>
-                            <input  class="form-control mb-3 telefone" type="text" name="telefone" required value="${cliente.telefone}" minlength="11" maxlength="11">
+                            <input  class="form-control mb-3 phone_with_ddd" type="text" name="telefone" required value="${cliente.telefone}" minlength="11" maxlength="11">
 
                             <i class="fas fa-road p-2"></i> <label> Endereço : </label>
                             <input  class="form-control mb-3" type="text" name="endereco" required value="${cliente.nomeRua}" minlength="5" maxlength="45">

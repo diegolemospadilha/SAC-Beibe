@@ -90,8 +90,10 @@ public class AtendimentoServlet extends HttpServlet {
 
                         if (atendimento != null) {
                             AtendimentoFacade.inserirAtendimento(atendimento);
-//                            rd = getServletContext().getRequestDispatcher("/AtendimentoServlet?action=list");
-//                            rd.forward(request, response);
+                            String strMessage = "Atendimento com id " + " inserido com sucesso!";
+                            request.setAttribute("msg", strMessage);
+                            //rd = getServletContext().getRequestDispatcher("AtendimentoServlet?action=list");
+                            //rd.forward(request, response);
                             response.sendRedirect("/SAC-Beibe/AtendimentoServlet?action=list");
                         }
                         break;

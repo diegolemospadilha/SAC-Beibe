@@ -80,7 +80,6 @@ public class ProdutoServlet extends HttpServlet {
                     ProdutoFacade.remover(id);
                     strMessage = "Produto com id " + id + " removida com sucesso!";
                     request.setAttribute("msg", strMessage);
-                    request.setAttribute("msg", "sasasasa");
                     listaProdutos = ProdutoFacade.buscarTodos();
                     request.setAttribute("listaProdutos", listaProdutos);
                     rd = getServletContext().getRequestDispatcher("/produto/produto.jsp");

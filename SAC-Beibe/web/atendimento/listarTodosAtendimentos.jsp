@@ -1,4 +1,5 @@
 <%@ page errorPage="erro.jsp" %>
+<%@include file="../templates/validationLoginBean.jsp"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -54,6 +55,15 @@
                 </div>
             </div>
         </div>
+        <c:if test="${!empty msg}">
+            <div style="margin-left: 37%" class=" w-25 d-flex justify-content-center alert alert-success alert-dismissible fade show" role="alert">
+                <strong><c:out value="${msg}"/> </strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+        </c:if>
         <div>
             <jsp:include page="../templates/footer.jsp" />
         </div>

@@ -38,10 +38,12 @@ public class LogoutServlet extends HttpServlet {
                 request.setAttribute("msg", "Usuário deslogado com sucesso. ");
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/main/login.jsp");
                 rd.forward(request, response);
+                response.sendRedirect("/main/login.jsp");
             } else {
                 request.setAttribute("msg", "Sessão Inválida. ");
                 RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
                 rd.forward(request, response);
+                response.sendRedirect("/main/login.jsp");
             }
         }
     }

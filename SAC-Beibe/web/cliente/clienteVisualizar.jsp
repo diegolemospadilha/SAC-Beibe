@@ -1,8 +1,6 @@
 <%@ page errorPage="erro.jsp" %>
+<%@include file="../templates/validationLoginBean.jsp"%>
 <%@page import="java.util.List"%>
-<%@page import="com.ufpr.tads.web2.beans.Cliente"%>
-<%@page import="com.ufpr.tads.web2.beans.User"%>
-<%@page import="com.ufpr.tads.web2.DAO.ClienteDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -13,15 +11,10 @@
     
         <jsp:include page="../templates/nav.jsp"/>
            
-        <jsp:useBean id="loginBean" class="com.ufpr.tads.web2.beans.LoginBean" scope="session"/>
         <div class='container col-md-6'>
             <div class='align-self-center m-5'>
-               <h2 class='text-center col-12-md' style='color:#000'>Portal Servlet</h2>
+               <h4>Dados do cliente</h4>
             </div>
-        </div>
-        
-        <div class='text-center m-5'> 
-            <h4>Dados do cliente</h4>
         </div>
         
         <div class='container d-flex justify-content-center'>

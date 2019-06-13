@@ -25,9 +25,10 @@ public class AtendimentoDAO {
     Connection conn = null;
 
     public List<Atendimento> all() throws SQLException {
-        List<Atendimento> listaAtendimentos = new ArrayList<Atendimento>();
+        List<Atendimento> listaAtendimentos = null;
         int id;
         try {
+            listaAtendimentos = new ArrayList<Atendimento>();
             conn = ConnectionFactory.getConnection();
             ResultSet rs = ConnectionFactory.getResultSet(conn, "SELECT * FROM tb_atendimento");
 
@@ -125,7 +126,7 @@ public class AtendimentoDAO {
             PreparedStatement statement = ConnectionFactory.getPreparedStatement(conn,
                     "INSERT INTO tb_atendimento (data_atendimento, "
                     + "descricao_atendimento, situacao_atendimento, "
-                    + "solucao_apresentada, id_cliente, id_produto, "
+                    + "solucao_apresentada, id_usuario, id_produto, "
                     + "id_tipo_atendimento)"
                     + " values (?,?,?,?,?,?,?) ");
 
@@ -237,7 +238,7 @@ public class AtendimentoDAO {
 
         }
     }
-
+    
     public int responder(int idAtendimento, String solucao) {
         try {
             conn = ConnectionFactory.getConnection();
